@@ -30,7 +30,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             bool salir = false;
             string opcion;
-
             do
             {
                 opcion = vista.vistaMenu();
@@ -40,7 +39,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         afegirExcursio();
                         break;
                     case "2.2":
-                        //mostrarExcursio();
+                        mostrarExcursio();
                         break;
                     case "3.1":
                         //afegirSociEstandar();
@@ -83,6 +82,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             ExcursioController excursioController = new ExcursioController(datos);
             ExcursioView excursioView = new ExcursioView(excursioController);
             excursioView.afegirExcursio();
+        }
+        private void mostrarExcursio()
+        {
+            ExcursioController excursioController= new ExcursioController(datos);
+            ExcursioView excursioView = new ExcursioView(excursioController);
+            List<string> llistaExcursions = datos.mostrarExcursio();
+            ExcursioView.mostrarExcursio(llistaExcursions);
         }
     }
 }

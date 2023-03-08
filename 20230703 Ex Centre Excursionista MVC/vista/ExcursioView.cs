@@ -18,7 +18,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.vista
         {
             excursioController = pexcursioController;
         }
-
         public void afegirExcursio()
         {
             Hashtable InsHash= new Hashtable();
@@ -49,6 +48,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.vista
             InsHash.Add("Descripcio", descripcio);
 
             excursioController.addExcursio(InsHash);
+        }
+        public void mostrarExcursio(List<string> llistaExcurions)
+        {
+            foreach(string Exc in llistaExcurions) 
+            {
+                Console.WriteLine(llistaExcurions);
+            }
         }
 
     }
