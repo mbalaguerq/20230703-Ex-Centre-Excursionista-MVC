@@ -11,40 +11,30 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public string vistaMenu()
         {
             string opcion;
-            Console.WriteLine("1.Carga de parámetros ");
-            Console.WriteLine("2.Gestión Excursiones ");
-            Console.WriteLine("3.Gestión de Socios ");
-            Console.WriteLine("4.Gestión de Inscripciones ");
-            Console.WriteLine("5. ");
-            Console.WriteLine("6. ");
-            Console.WriteLine("7. ");
-            Console.WriteLine("8. ");
+            bool salir = false;
+                       
+            Console.WriteLine("1.Gestión Excursiones ");
+            Console.WriteLine("2.Gestión de Socios ");
+            Console.WriteLine("3.Gestión de Inscripciones ");            
             Console.WriteLine("0. Salir");
             opcion = pedirOpcionMenu();
-            return opcion;
-        }
-        private string pedirOpcionMenu()
-        {
-            string opcion;
             do
             {
-                Console.Write("Opcion: ");
-                opcion = Console.ReadLine();
-            } while (!"01234".Contains(opcion));
-
-            return opcion;
-        }
-        public string menuGestionExcursiones()
-        {
-            string opcion;
-            Console.WriteLine("1.Añadir Excusión ");
-            Console.WriteLine("2.Mostrar Excusiones");// con filtro entre fechas
-            Console.WriteLine("3.Gestión de Inscripciones ");                                                      
-            Console.WriteLine("0. Salir");
-            opcion = pedirOpcionMenuExc();
-            return opcion;
-        }
-        private string pedirOpcionMenuExc()
+                switch (opcion)
+                {
+                    
+                    case "1":
+                        return menuGestionExcursiones();
+                    case "2":
+                        return menuGestionSocios();
+                    case "3":
+                        return menuGestionIns();
+                    default:
+                        return "0";
+                }
+            }while(!salir);
+        }         
+        private string pedirOpcionMenu()
         {
             string opcion;
             do
@@ -55,20 +45,66 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
 
             return opcion;
         }
+        public string menuGestionExcursiones()
+        {            
+            string opcion;
+            Console.WriteLine("1.Añadir Excusión ");
+            Console.WriteLine("2.Mostrar Excusiones");// con filtro entre fechas                                                                 
+            Console.WriteLine("0. Salir");
+            opcion = pedirOpcionMenuExc();
+            
+            switch (opcion)
+            {
+                case "1":
+                    return "2.1";   //afegirExcursio();             
+                case "2":
+                    return "2.2";   //mostrarExcursio();                                               
+                default:
+                    return "0";                   
+            }         
+        }
+        private string pedirOpcionMenuExc()
+        {
+            string opcion;
+            do
+            {
+                Console.Write("Opcion: ");
+                opcion = Console.ReadLine();
+            } while (!"012".Contains(opcion));
+
+            return opcion;
+        }
         public string menuGestionSocios()
         {
             string opcion;
             Console.WriteLine("1.Añadir Socio Estándar ");
-            Console.WriteLine("2.Modificar tipo de seguro de un socio estándar ");
-            Console.WriteLine("3.Gestión de Inscripciones ");
-            Console.WriteLine("4.Añadir Socio Federado ");
-            Console.WriteLine("5.Añadir Socio Infantil ");
-            Console.WriteLine("6.Eliminar socio ");
-            Console.WriteLine("7.Mostrar Socios"); //(Todos o por tipo de socio)
-            Console.WriteLine("8.Mostrar Factura mensual por socios ");
+            Console.WriteLine("2.Modificar tipo de seguro de un socio estándar ");       
+            Console.WriteLine("3.Añadir Socio Federado ");
+            Console.WriteLine("4.Añadir Socio Infantil ");
+            Console.WriteLine("5.Eliminar socio ");
+            Console.WriteLine("6.Mostrar Socios"); //(Todos o por tipo de socio)
+            Console.WriteLine("7.Mostrar Factura mensual por socios ");
             Console.WriteLine("0. Salir");
             opcion = pedirOpcionMenuSocio();
-            return opcion;
+            switch (opcion)
+            {
+                case "1":
+                    return "3.1"; //afegirSociEstandar();                   
+                case "2":
+                    return "3.2"; //modificarAssegurança();                    
+                case "3":
+                    return "3.3"; //afegirSociFederat();                    
+                case "4":
+                    return "3.4"; //afegirSociInfantil();                    
+                case "5":
+                    return "3.5"; //eliminarSoci();                    
+                case "6":
+                    return "3.6"; //mostrarSocis();                    
+                case "7":
+                    return "3.7"; //facturaMensualSoci();                    
+                default:
+                    return "0";
+            }
         }
         private string pedirOpcionMenuSocio()
         {
@@ -77,7 +113,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             {
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
-            } while (!"012345678".Contains(opcion));
+            } while (!"01234567".Contains(opcion));
 
             return opcion;
         }
@@ -89,7 +125,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine("3.Mostar inscripciones");// con las opciones de filtrar por socio y/o fecha           
             Console.WriteLine("0. Salir");
             opcion = pedirOpcionMenuIns();
-            return opcion;
+            switch (opcion)
+            {
+                case "1":
+                    return "4.1"; //afegirInscripcio();                    
+                case "2":
+                    return "4.2"; //eliminarInscripcio();                    
+                case "3":
+                    return "4.3"; //mostrarInscripcions();
+                default:
+                    return "0";
+            }
         }
         private string pedirOpcionMenuIns()
         {

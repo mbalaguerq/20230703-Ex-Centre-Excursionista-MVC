@@ -1,4 +1,5 @@
 ﻿using _20230703_Ex_Centre_Excursionista_MVC.Model;
+using _20230703_Ex_Centre_Excursionista_MVC.vista;
 using _20230703_Ex_Centre_Excursionista_MVC.Vista;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
     {
         CentreExcursionista datos;
         View vista;
-        public ProgControlador(CentreExcursionista datos, View vista)
+        public ProgControlador(CentreExcursionista datos, View vista)//aquest constructor no s'esta executantv mai
         {
             this.datos = datos;
             this.vista = vista;
@@ -21,6 +22,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             datos = new CentreExcursionista();
             vista = new View();
+            //Executo la càrrega de dades al fer el New de centre exc.
+            datos.carregaParametres();
+
         }
         public void gestionMenu()
         {
@@ -31,34 +35,54 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             {
                 opcion = vista.vistaMenu();
                 switch (opcion)
-                {
-                    case "1":
-                        
+                {                    
+                    case "2.1":
+                        afegirExcursio();
                         break;
-                    case "2":
-                       
+                    case "2.2":
+                        //mostrarExcursio();
                         break;
-                    case "3":
-                        
+                    case "3.1":
+                        //afegirSociEstandar();
                         break;
-                    case "4":
-                       
+                    case "3.2":
+                        //modificarAssegurança();
                         break;
-                    case "5":
-                        
+                    case "3.3":
+                        //afegirSociFederat();
                         break;
-                    case "6":
-                        
+                    case "3.4":
+                        //afegirSociInfantil();
+                        break;
+                    case "3.5":
+                        //eliminarSoci();
+                        break;
+                    case "3.6":
+                        //mostrarSocis();
+                        break;
+                    case "3.7":
+                        //facturaMensualSoci();
+                        break;
+                    case "4.1":
+                        //afegirInscripcio();
+                        break;
+                    case "4.2":
+                        //eliminarInscripcio();
                         break;
                     case "7":
-                        
+                        //mostrarInscripcions();
                         break;
                     case "0":
                         salir = true;
                         break;
                 }
-
             } while (!salir);
+        }
+        private void afegirExcursio()
+        {
+            ExcursioController excursioController = new ExcursioController(datos);
+            ExcursioView excursioView = new ExcursioView(excursioController);
+            excursioView.afegirExcursio();
         }
     }
 }

@@ -43,8 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador\AssegurController.cs" />
+    <Compile Include="Controlador\ExcursioController.cs" />
+    <Compile Include="Controlador\FederacioController.cs" />
+    <Compile Include="Controlador\InscripcioController.cs" />
     <Compile Include="Controlador\ProgControlador.cs" />
     <Compile Include="Controlador\Program.cs" />
+    <Compile Include="Controlador\SociController.cs" />
     <Compile Include="model\Assegurança.cs" />
     <Compile Include="model\CentreExcursionista.cs" />
     <Compile Include="model\Excursio.cs" />
@@ -55,6 +60,11 @@
     <Compile Include="model\Soci.cs" />
     <Compile Include="model\SociStandar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="vista\AssegurView.cs" />
+    <Compile Include="vista\ExcursioView.cs" />
+    <Compile Include="vista\FederacioView.cs" />
+    <Compile Include="vista\InscripcioView.cs" />
+    <Compile Include="vista\SociView.cs" />
     <Compile Include="vista\View.cs" />
   </ItemGroup>
   <ItemGroup>
