@@ -21,5 +21,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             datos.addExcursio(InsHash);
         }
+        public List<string> buscaExcursio(Hashtable fecha)
+        {
+            List<String> list = new List<String>();            
+            list=  datos.buscarExcursio(fecha);
+           
+            return list;
+        }
     }
 }

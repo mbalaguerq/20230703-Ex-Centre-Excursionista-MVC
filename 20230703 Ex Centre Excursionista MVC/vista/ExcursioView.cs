@@ -4,6 +4,7 @@ using _20230703_Ex_Centre_Excursionista_MVC.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.vista
     {
         ExcursioController excursioController;
         public ExcursioView() { }
+
         public ExcursioView(ExcursioController pexcursioController)
         {
             excursioController = pexcursioController;
-        }
+        }        
         public void afegirExcursio()
         {
             Hashtable InsHash= new Hashtable();
@@ -49,13 +51,31 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.vista
 
             excursioController.addExcursio(InsHash);
         }
-        public void mostrarExcursio(List<string> llistaExcurions)
+        public void mostrarExcursio()
         {
-            foreach(string Exc in llistaExcurions) 
-            {
-                Console.WriteLine(llistaExcurions);
-            }
-        }
+            Hashtable HashData= new Hashtable();
 
+            DateTime dataI, dataF;
+
+            Console.WriteLine();
+            Console.WriteLine("Data d'inici: ");
+            dataI = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Data Final: ");
+            dataF = DateTime.Parse(Console.ReadLine());
+
+            HashData.Add("DataI", dataI);
+            HashData.Add("DataF", dataF);
+
+            List<String> list = new List<String>();
+
+            list= excursioController.buscaExcursio(HashData);
+
+            foreach(string dato in list)
+            {
+                Console.WriteLine(dato);
+
+            }
+         
+        }
     }
 }

@@ -12,9 +12,22 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
     {
         CentreExcursionista datos;
 
-        public SociController(CentreExcursionista pdatos) 
+        public SociController(CentreExcursionista pdatos)
         {
-            datos= pdatos;
+            datos = pdatos;
+        }
+        public string buscarSociByNif(string nifC)
+        {
+            // llamamos al método getNombreClienteByNif de la clase datos
+            // para buscar el nombre del cliente
+
+            string nif = datos.getNomSociByNif(nifC);
+            return nif;
+        }
+        public int nouNSoci()
+        {
+            int nouNSoci = datos.getNouNSoci();
+            return nouNSoci;
         }
     }
 }

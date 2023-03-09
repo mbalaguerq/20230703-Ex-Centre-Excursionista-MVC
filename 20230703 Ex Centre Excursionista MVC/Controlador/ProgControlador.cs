@@ -42,7 +42,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         mostrarExcursio();
                         break;
                     case "3.1":
-                        //afegirSociEstandar();
+                        afegirSociEstandar();
                         break;
                     case "3.2":
                         //modificarAssegurança();
@@ -84,11 +84,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             excursioView.afegirExcursio();
         }
         private void mostrarExcursio()
-        {
+        {            
+            List<string> llistaExcursions= datos.llistaExcursions();
             ExcursioController excursioController= new ExcursioController(datos);
-            ExcursioView excursioView = new ExcursioView(excursioController);
-            List<string> llistaExcursions = datos.mostrarExcursio();
-            ExcursioView.mostrarExcursio(llistaExcursions);
+            ExcursioView excursioView = new ExcursioView(excursioController);             
+            excursioView.mostrarExcursio();
+        }
+        private void afegirSociEstandar() 
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.afegirSociStandar();
         }
     }
 }

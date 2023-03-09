@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,28 +40,28 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public void addExcursio(Hashtable excursioHash)
         {
-            Excursio excursio= new Excursio();
+            Excursio excursio = new Excursio();
             excursio.Ndies = (int)excursioHash["Dies"];
             excursio.Preu = (decimal)excursioHash["Preu"];
             excursio.Codi = (int)excursioHash["Codi"];
             excursio.Data = (DateTime)excursioHash["Data"];
             excursio.Descripcio = (string)excursioHash["Descripcio"];
-            excursions.Add(excursio);                       
+            excursions.Add(excursio);
         }
         public void addFederacio(Hashtable fedeHash)
         {
-            Federacio federacio= new Federacio();
+            Federacio federacio = new Federacio();
             federacio.Nom = (string)fedeHash["Nom"];
             federacio.Codi = (int)fedeHash["Codi"];
             federacions.Add(federacio);
         }
         public void addFederat(Hashtable fedeHash)
         {
-            Federat fede= new Federat();
+            Federat fede = new Federat();
             fede.Nom = (string)fedeHash["Nom"];
             fede.Nsoci = (int)fedeHash["Soci"];
             fede.Nif = (string)fedeHash["Nif"];
-            socis.Add(fede);            
+            socis.Add(fede);
         }
         public void addSociStandar(Hashtable standarHash)
         {
@@ -87,7 +88,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             i.Soci1 = (Soci)inscripcioHash["Soci"];
             inscripcions.Add(i);
         }
-        public void addSeguro(Hashtable tipoSeguroHash) 
+        public void addSeguro(Hashtable tipoSeguroHash)
         {
             Assegurança seguro = new Assegurança();
             seguro.Precio = (decimal)tipoSeguroHash["Preu"];
@@ -159,7 +160,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Infantil sociInf = new Infantil();
             sociInf.Nom = "Mateuet Ardils i Canter";
             sociInf.Nsoci = 376;
-            sociInf.NSociPare =375;
+            sociInf.NSociPare = 375;
             socis.Add(sociInf);
 
             Infantil sociInf2 = new Infantil();
@@ -201,19 +202,49 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             seguro2.Precio = 20;
             seguro2.Ts = TipoSeguro.complert;
             asseguran.Add(seguro2);
-        }        
-        public List<string> mostrarExcursio()
-        {
-            List<string> list = new List<string>();
-
-            foreach(Excursio excursio in excursions)
-            {
-                list.Add(excursio.ToString());
-            }
-            return list;
         }
-        
+        public List<string> llistaExcursions()
+        {
+            List<string> llistaExcursions = new List<string>();
+            foreach (Excursio veh in excursions)
+            {
+                llistaExcursions.Add(veh.Descripcio + "\t" + veh.Codi + "\t" + veh.Data + "\t" +
+                    veh.Ndies + "\t" + veh.Preu + "\t");
+            }
+            return llistaExcursions;
+        }
+        public List<string> buscarExcursio(Hashtable dates)
+        {
+            List<string> trobades = new List<string>();
+            foreach (Excursio exc in excursions)
+            {
+                if (exc.Data >= DateTime.Parse((string)dates["DataI"]) && exc.Data <= DateTime.Parse((string)dates["DataF"]))
+                {
+                    trobades.Add(exc.ToString());
+                }
+            }
+            return trobades;
+        }
 
-
+        public string getNomSociByNif(string nif)
+        {
+            foreach (Soci s in socis)
+            {
+                if (s.GetType().Name != "Infantil")
+                {
+                    if ((s as SociStandar).Nif.Equals(nif))
+                    {
+                        return (s as SociStandar).Nif;
+                    }
+                }
+            }
+            return "";
+        }
+        private static int _contador = 500;
+        public  int getNouNSoci()
+        {
+            _contador++;
+            return _contador;
+        }
     }
 }

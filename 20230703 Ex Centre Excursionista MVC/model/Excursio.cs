@@ -15,7 +15,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         private int codi;
         private decimal preu;
         private int ndies;
-
         public string Descripcio { get => descripcio; set => descripcio = value; }
         public DateTime Data { get => data; set => data = value; }
         public int Codi { get => codi; set => codi = value; }
@@ -24,8 +23,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public override string ToString()
 
         {
-            return "Excursió: " +  Descripcio + "\n" + "Codi: " + Codi + " \n " + "Data: " +  Data +
-                   "Preu: " + Preu  + "Número de dies: " + Ndies;
+            return "Excursió: " +  Descripcio + "\n" + "Codi: " + Codi + "\n" + "Data: " +  Data + "\n" +
+                   "Preu: " + Preu + "\n" + "Número de dies: " + Ndies + "\n";
         }
     }
 }
