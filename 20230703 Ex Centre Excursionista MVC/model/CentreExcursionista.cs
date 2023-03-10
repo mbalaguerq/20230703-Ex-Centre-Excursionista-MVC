@@ -1,7 +1,4 @@
-﻿using _20230703_Ex_Centre_Excursionista_MVC.Controlador;
-using _20230703_Ex_Centre_Excursionista_MVC.model;
-using _20230703_Ex_Centre_Excursionista_MVC.vista;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +66,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             sociStan.Nom = (string)standarHash["Nom"];
             sociStan.Nsoci = (int)standarHash["Soci"];
             sociStan.Nif = (string)standarHash["Nif"];
-            sociStan.Tipusasseg = (TipoSeguro)standarHash["TipusSeg"];
+            sociStan.Assegurança = (Assegurança)standarHash["Assegurança"];
             socis.Add(sociStan);
         }
         public void addSociInfantil(Hashtable standarHash)
@@ -134,27 +131,39 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Federat fede = new Federat();
             fede.Nom = "Miquel Molins Cardell";
             fede.Nsoci = 156;
+            fede.Fede = federacio2;
             fede.Nif = "11111111A";
             socis.Add(fede);
 
             Federat fede2 = new Federat();
             fede2.Nom = "Manel Cordils i Cabdell";
             fede2.Nsoci = 215;
+            fede2.Fede = federacio;
             fede2.Nif = "22222222B";
             socis.Add(fede2);
+
+            Assegurança seguro = new Assegurança();
+            seguro.Precio = 10;
+            seguro.Ts = TipoSeguro.basic;
+            asseguran.Add(seguro);
+
+            Assegurança seguro2 = new Assegurança();
+            seguro2.Precio = 20;
+            seguro2.Ts = TipoSeguro.complert;
+            asseguran.Add(seguro2);
 
             SociStandar sociStan = new SociStandar();
             sociStan.Nom = "Marcel Bordils i Clatell";
             sociStan.Nsoci = 344;
             sociStan.Nif = "33333333C";
-            sociStan.Tipusasseg = TipoSeguro.basic;
+            sociStan.Assegurança = seguro;
             socis.Add(sociStan);
 
             SociStandar sociStan2 = new SociStandar();
             sociStan2.Nom = "Mateu Ardils i Flaquer";
             sociStan2.Nsoci = 375;
             sociStan2.Nif = "44444444D";
-            sociStan2.Tipusasseg = TipoSeguro.complert;
+            sociStan.Assegurança = seguro2;
             socis.Add(sociStan2);
 
             Infantil sociInf = new Infantil();
@@ -193,15 +202,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             i4.Soci1 = sociInf2;
             inscripcions.Add(i4);
 
-            Assegurança seguro = new Assegurança();
-            seguro.Precio = 10;
-            seguro.Ts = TipoSeguro.basic;
-            asseguran.Add(seguro);
-
-            Assegurança seguro2 = new Assegurança();
-            seguro2.Precio = 20;
-            seguro2.Ts = TipoSeguro.complert;
-            asseguran.Add(seguro2);
+            
         }
         public List<string> llistaExcursions()
         {
@@ -225,18 +226,23 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return trobades;
         }
-
         public string getNomSociByNif(string nif)
         {
             foreach (Soci s in socis)
             {
                 if (s.GetType().Name != "Infantil")
                 {
-                    if ((s as SociStandar).Nif.Equals(nif))
+                    if(s is SociStandar && (s as SociStandar).Nif.Equals(nif))    
+                    //Compte amb aquesta linea. 
                     {
                         return (s as SociStandar).Nif;
                     }
+                    if (s is Federat && (s as Federat).Nif.Equals(nif))
+                    {
+                        return (s as Federat).Nif;
+                    }
                 }
+
             }
             return "";
         }
@@ -245,6 +251,29 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             _contador++;
             return _contador;
+        }
+
+        public Soci  getSociByNum(int nSociBuscat)
+        {
+            Soci sociTrobat;
+            //No fa falta fer un New ja que estem buscant un objecte qeu ja existeix. 
+            //Encara que soci es una classe abstracta, el puc capturar
+
+            foreach (Soci soci in socis) 
+            {
+                if(soci.Nsoci.Equals(nSociBuscat)) 
+                {
+                    sociTrobat = soci;
+                    return sociTrobat;
+                }                               
+            }
+            return null;
+        }
+        public void actualAsseg(int nSoci)
+        {
+            Soci modifiSoci= getSociByNum(nSoci);
+
+            (modifiSoci as SociStandar)
         }
     }
 }

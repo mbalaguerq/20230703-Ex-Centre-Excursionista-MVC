@@ -15,5 +15,18 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             datos = pdatos;
         }
+        public string getSociByNumero(int nSoci)
+        {
+            Soci sociObjeto;
+            string socioString;
+            sociObjeto = datos.getSociByNum(nSoci);
+            socioString=sociObjeto.ToString();
+
+            return socioString;            
+        }
+        public void actualAsseg(int nSoci)
+        {
+            datos.actualAsseg(nSoci);
+        }
     }
 }

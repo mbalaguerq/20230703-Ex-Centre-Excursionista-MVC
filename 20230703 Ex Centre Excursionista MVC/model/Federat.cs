@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20230703_Ex_Centre_Excursionista_MVC.model
+namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 {
     internal class Federat : Soci
     {
         private string nif;
-        private Federat fede;
+        private Federacio fede;
 
         public string Nif { get => nif; set => nif = value; }
-        internal Federat Fede { get => fede; set => fede = value; }
+        internal Federacio Fede { get => fede; set => fede = value; }
     }
 }

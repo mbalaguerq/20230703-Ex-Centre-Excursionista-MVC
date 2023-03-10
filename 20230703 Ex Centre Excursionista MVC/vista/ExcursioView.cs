@@ -1,5 +1,4 @@
 ﻿using _20230703_Ex_Centre_Excursionista_MVC.Controlador;
-using _20230703_Ex_Centre_Excursionista_MVC.model;
 using _20230703_Ex_Centre_Excursionista_MVC.Model;
 using System;
 using System.Collections;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20230703_Ex_Centre_Excursionista_MVC.vista
+namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
 {
     internal class ExcursioView
     {

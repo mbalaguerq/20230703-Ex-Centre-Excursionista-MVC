@@ -1,5 +1,4 @@
 ﻿using _20230703_Ex_Centre_Excursionista_MVC.Model;
-using _20230703_Ex_Centre_Excursionista_MVC.vista;
 using _20230703_Ex_Centre_Excursionista_MVC.Vista;
 using System;
 using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         afegirSociEstandar();
                         break;
                     case "3.2":
-                        //modificarAssegurança();
+                        modifAsseg();
                         break;
                     case "3.3":
                         //afegirSociFederat();
@@ -95,6 +94,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             SociController sociController = new SociController(datos);
             SociView sociView = new SociView(sociController);
             sociView.afegirSociStandar();
+        }
+        private void modifAsseg()
+        {
+            AssegurController assegurController = new AssegurController(datos);                
+            AssegurView assegurView = new AssegurView(assegurController);
+            assegurView.modifiasseg();
         }
     }
 }

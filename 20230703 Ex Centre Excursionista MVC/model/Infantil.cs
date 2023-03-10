@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20230703_Ex_Centre_Excursionista_MVC.model
+namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 {
     internal class Infantil : Soci
     {

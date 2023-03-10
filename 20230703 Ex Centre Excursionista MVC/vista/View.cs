@@ -17,6 +17,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine("2.Gestión de Socios ");
             Console.WriteLine("3.Gestión de Inscripciones ");            
             Console.WriteLine("0. Salir");
+            Console.WriteLine();
             opcion = pedirOpcionMenu();
             do
             {
@@ -39,6 +40,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             do
             {
+                Console.WriteLine();
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
             } while (!"0123".Contains(opcion));
@@ -48,6 +50,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public string menuGestionExcursiones()
         {            
             string opcion;
+            Console.WriteLine();
             Console.WriteLine("1.Añadir Excusión ");
             Console.WriteLine("2.Mostrar Excusiones");// con filtro entre fechas                                                                 
             Console.WriteLine("0. Salir");
@@ -68,6 +71,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             do
             {
+                Console.WriteLine();
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
             } while (!"012".Contains(opcion));
@@ -77,6 +81,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public string menuGestionSocios()
         {
             string opcion;
+            Console.WriteLine();
             Console.WriteLine("1.Añadir Socio Estándar ");
             Console.WriteLine("2.Modificar tipo de seguro de un socio estándar ");       
             Console.WriteLine("3.Añadir Socio Federado ");
@@ -111,6 +116,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             do
             {
+                Console.WriteLine();
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
             } while (!"01234567".Contains(opcion));
@@ -120,6 +126,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public string menuGestionIns()
         {
             string opcion;
+            Console.WriteLine();
             Console.WriteLine("1.Añadir Inscripción ");
             Console.WriteLine("2.Eliminar Inscripción ");
             Console.WriteLine("3.Mostar inscripciones");// con las opciones de filtrar por socio y/o fecha           
@@ -142,6 +149,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             do
             {
+                Console.WriteLine();
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
             } while (!"0123".Contains(opcion));
