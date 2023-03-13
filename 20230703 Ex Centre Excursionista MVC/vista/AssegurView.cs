@@ -29,7 +29,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             sociString = assegurController.getSociByNumero(nSoci);
             Console.WriteLine(sociString);
             resposta= confirmCanvi();
-            if(resposta.Equals("si"))
+            if(resposta.Equals("1"))
                 {
                 assegurController.actualAsseg(nSoci);
             }
@@ -46,7 +46,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.Write("1  SI.\t 2 NO");
                 resposta = Console.ReadLine();
                 resposta.ToLower();
-            } while (!resposta.Equals("si") && !resposta.Equals("no"));
+            } while (!resposta.Equals("1") && !resposta.Equals("2"));
             return resposta;
         }
     }

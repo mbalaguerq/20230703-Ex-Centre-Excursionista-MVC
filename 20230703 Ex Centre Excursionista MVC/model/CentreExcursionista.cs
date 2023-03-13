@@ -202,7 +202,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             i4.Soci1 = sociInf2;
             inscripcions.Add(i4);
 
-            
+
         }
         public List<string> llistaExcursions()
         {
@@ -232,7 +232,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             {
                 if (s.GetType().Name != "Infantil")
                 {
-                    if(s is SociStandar && (s as SociStandar).Nif.Equals(nif))    
+                    if (s is SociStandar && (s as SociStandar).Nif.Equals(nif))
                     //Compte amb aquesta linea. 
                     {
                         return (s as SociStandar).Nif;
@@ -246,34 +246,59 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return "";
         }
+
+
         private static int _contador = 500;
-        public  int getNouNSoci()
+        public int getNouNSoci()
         {
             _contador++;
             return _contador;
         }
 
-        public Soci  getSociByNum(int nSociBuscat)
+        public Soci getSociByNum(int nSociBuscat)
         {
             Soci sociTrobat;
             //No fa falta fer un New ja que estem buscant un objecte qeu ja existeix. 
             //Encara que soci es una classe abstracta, el puc capturar
 
-            foreach (Soci soci in socis) 
+            foreach (Soci soci in socis)
             {
-                if(soci.Nsoci.Equals(nSociBuscat)) 
+                if (soci.Nsoci.Equals(nSociBuscat))
                 {
                     sociTrobat = soci;
                     return sociTrobat;
-                }                               
+                }
             }
             return null;
         }
         public void actualAsseg(int nSoci)
         {
-            Soci modifiSoci= getSociByNum(nSoci);
+            Soci modifiSoci = getSociByNum(nSoci);
+            {                                
+                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.basic))
+                {
+                    foreach (Assegurança seguro in asseguran)
+                    {
+                      if(seguro.Ts.ToString().Equals("complert"))
+                            {
+                            (modifiSoci as SociStandar).Assegurança = seguro;
+                        }
+                    }                       
+                }
+                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.complert))
+                {
+                    foreach (Assegurança seguro in asseguran)
+                    {
+                        if (seguro.Ts==TipoSeguro.basic)//Al tenir el enum a la mateix clase podem fer un ==
+                        {
+                            (modifiSoci as SociStandar).Assegurança = seguro;
+                        }
+                    }
+                }
 
-            (modifiSoci as SociStandar)
+
+            }
+
         }
     }
 }
