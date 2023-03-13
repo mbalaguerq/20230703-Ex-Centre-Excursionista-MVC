@@ -47,7 +47,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         modifAsseg();
                         break;
                     case "3.3":
-                        //afegirSociFederat();
+                        afegirSociFederat();
                         break;
                     case "3.4":
                         //afegirSociInfantil();
@@ -100,6 +100,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             AssegurController assegurController = new AssegurController(datos);                
             AssegurView assegurView = new AssegurView(assegurController);
             assegurView.modifiasseg();
+        }
+        private void afegirSociFederat()
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.afegirSociFederat();
         }
     }
 }

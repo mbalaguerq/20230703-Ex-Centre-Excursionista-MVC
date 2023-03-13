@@ -242,7 +242,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                         return (s as Federat).Nif;
                     }
                 }
-
             }
             return "";
         }
