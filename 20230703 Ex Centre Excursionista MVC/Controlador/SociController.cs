@@ -25,6 +25,15 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             string nif = datos.getNomSociByNif(nifC);
             return nif;
         }
+        public Soci buscarPareByNif(string nifC)
+        {
+            // llamamos al método getNombreClienteByNif de la clase datos
+            // para buscar el nombre del cliente
+
+            Soci pare = datos.getNomPareByNif(nifC);
+            return pare;
+        }
+
         public int nouNSoci()
         {
             int nouNSoci = datos.getNouNSoci();
@@ -43,10 +52,31 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             datos.addFederat(sociHash);
         }
+        public void addSociInfantil(Hashtable sociHash)
+        {
+            datos.addSociInfantil(sociHash);
+        }
         public Federacio triaFede(int triaFede)
         {
             Federacio fedeTrobada = datos.triaFede(triaFede);
                 return fedeTrobada;
         }
+
+        public Soci trobaSoci(int nSoci)
+        {
+           Soci sociTrobat= datos.getSociByNum(nSoci);
+            return sociTrobat;
+        }
+        public void deleteSoci(Soci sociTrobat)
+        {
+            datos.deleteSoci(sociTrobat);            
+        }
+        public List<string> llistaSocis(int opcio)
+        {
+            List<String> llistaSocis = new List<String>();
+            llistaSocis = datos.llistaSocis(opcio);
+            return llistaSocis;
+        }
+        
     }
 }

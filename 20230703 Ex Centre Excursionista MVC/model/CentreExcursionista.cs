@@ -75,7 +75,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Infantil sociInf = new Infantil();
             sociInf.Nom = (string)standarHash["Nom"];
             sociInf.Nsoci = (int)standarHash["Soci"];
-            sociInf.NSociPare = (int)standarHash["Nif"];
+            sociInf.NSociPare = (int)standarHash["SociPare"];
             socis.Add(sociInf);
         }
         public void addInscripcio(Hashtable inscripcioHash)
@@ -247,6 +247,26 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             return "";
         }
 
+        public Soci getNomPareByNif(string nif)
+        {
+            foreach (Soci s in socis)
+            {
+                if (s.GetType().Name != "Infantil")
+                {
+                    if (s is SociStandar && (s as SociStandar).Nif.Equals(nif))
+                    //Compte amb aquesta linea. 
+                    {
+                        return (s as SociStandar);
+                    }
+                    if (s is Federat && (s as Federat).Nif.Equals(nif))
+                    {
+                        return (s as Federat);
+                    }
+                }
+            }
+            return null;
+        }
+
         private static int _contador = 500;
         public int getNouNSoci()
         {
@@ -314,5 +334,31 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
+        public void deleteSoci(Soci sociTrobat)
+        {
+            foreach (Soci soci in socis)
+            {
+                if(soci.Nsoci == sociTrobat.Nsoci) 
+                { 
+                socis.Remove(soci);
+                 return;
+                }
+            }
+        }
+
+        public List <string> llistaSocis(int opcio)
+        {
+            List<string> llistaSocis = new List<string>();
+
+            foreach (Soci soci in socis)
+            {
+
+            }
+
+
+
+            return llistaSocis;
+        }
+
     }
 }

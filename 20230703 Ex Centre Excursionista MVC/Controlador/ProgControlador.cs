@@ -50,13 +50,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         afegirSociFederat();
                         break;
                     case "3.4":
-                        //afegirSociInfantil();
+                        afegirSociInfantil();
                         break;
                     case "3.5":
-                        //eliminarSoci();
+                        eliminarSoci();
                         break;
                     case "3.6":
-                        //mostrarSocis();
+                        mostrarSocis();
                         break;
                     case "3.7":
                         //facturaMensualSoci();
@@ -106,6 +106,24 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             SociController sociController = new SociController(datos);
             SociView sociView = new SociView(sociController);
             sociView.afegirSociFederat();
+        }
+        private void afegirSociInfantil()
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.afegirSociInfantil();
+        }
+        private void eliminarSoci()
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.eliminarSoci();
+        }
+        private void mostrarSocis()
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.mostrarSocis();
         }
     }
 }
