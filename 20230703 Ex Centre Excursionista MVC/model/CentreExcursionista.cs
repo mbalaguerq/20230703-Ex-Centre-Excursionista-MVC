@@ -58,6 +58,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             fede.Nom = (string)fedeHash["Nom"];
             fede.Nsoci = (int)fedeHash["Soci"];
             fede.Nif = (string)fedeHash["Nif"];
+            fede.Fede = (Federacio)fedeHash["Federacio"];
             socis.Add(fede);
         }
         public void addSociStandar(Hashtable standarHash)
@@ -246,14 +247,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             return "";
         }
 
-
         private static int _contador = 500;
         public int getNouNSoci()
         {
             _contador++;
             return _contador;
         }
-
         public Soci getSociByNum(int nSociBuscat)
         {
             Soci sociTrobat;
@@ -273,31 +272,47 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public void actualAsseg(int nSoci)
         {
             Soci modifiSoci = getSociByNum(nSoci);
-            {                                
+            {
                 if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.basic))
                 {
                     foreach (Assegurança seguro in asseguran)
                     {
-                      if(seguro.Ts.ToString().Equals("complert"))
-                            {
-                            (modifiSoci as SociStandar).Assegurança = seguro;
-                        }
-                    }                       
-                }
-                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.complert))
-                {
-                    foreach (Assegurança seguro in asseguran)
-                    {
-                        if (seguro.Ts==TipoSeguro.basic)//Al tenir el enum a la mateix clase podem fer un ==
+                        if (seguro.Ts.ToString().Equals("complert"))
                         {
                             (modifiSoci as SociStandar).Assegurança = seguro;
                         }
                     }
                 }
-
-
+                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.complert))
+                {
+                    foreach (Assegurança seguro in asseguran)
+                    {
+                        if (seguro.Ts == TipoSeguro.basic)//Al tenir el enum a la mateix clase podem fer un ==
+                        {
+                            (modifiSoci as SociStandar).Assegurança = seguro;
+                        }
+                    }
+                }
             }
 
+        }
+        public Assegurança triaAsseg(TipoSeguro tipus)
+        {
+            foreach (Assegurança seguro in asseguran)
+            {
+                if (seguro.Ts == tipus)
+                { return seguro; }
+            }
+            return null;
+        }
+        public Federacio triaFede(int triaFede)
+        {
+            foreach (Federacio fede in federacions)
+            {
+                if (fede.Codi == triaFede)
+                { return fede; }
+            }
+            return null;
         }
     }
 }

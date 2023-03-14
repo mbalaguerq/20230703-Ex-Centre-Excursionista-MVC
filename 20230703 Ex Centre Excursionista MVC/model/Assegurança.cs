@@ -13,5 +13,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public decimal Precio { get => precio; set => precio = value; }
         internal TipoSeguro Ts { get => ts; set => ts = value; }
+
+        public override string ToString()
+        {
+            return "Tipus d'Assegurança: " + ts + "\n" +  "Preu: " + precio + "Euros";
+        }
     }
 }

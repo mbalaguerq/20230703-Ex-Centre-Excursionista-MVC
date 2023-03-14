@@ -10,11 +10,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
     {
         private int nsoci;
         private string nom;
-        private Inscripcio Inscrip;
+       
        
         public int Nsoci { get => nsoci; set => nsoci = value; }
         public string Nom { get => nom; set => nom = value; }
-        internal Inscripcio Inscrip1 { get => Inscrip; set => Inscrip = value; }
+        
 
         public override string ToString()
         {

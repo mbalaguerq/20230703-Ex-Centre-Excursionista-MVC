@@ -22,8 +22,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             do
             {
                 switch (opcion)
-                {
-                    
+                {                    
                     case "1":
                         return menuGestionExcursiones();
                     case "2":

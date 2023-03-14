@@ -13,5 +13,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public int Codi { get => codi; set => codi = value; }
         public string Nom { get => nom; set => nom = value; }
+        public override string ToString()
+        {
+            return "Codi: " + "\n" + codi + "\n" + nom;
+        }
     }
 }

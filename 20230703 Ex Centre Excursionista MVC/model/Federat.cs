@@ -13,5 +13,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public string Nif { get => nif; set => nif = value; }
         internal Federacio Fede { get => fede; set => fede = value; }
+        public override string ToString()
+        {
+            return base.ToString() + "\n" + "Nif: " + nif + "\n" +  "Federació: " + fede;
+        }
     }
+   
 }
