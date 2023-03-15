@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
 {
     internal class SociView
-    {
+    {        
         SociController SociController;
         public SociView() { }
         public SociView(SociController psociController)
@@ -140,9 +140,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {
             Hashtable sociHash = new Hashtable();
             int nsoci;
-
             string nom, nif;
-
 
             Console.WriteLine();
             Console.WriteLine("Nou Soci Infantil :");
@@ -150,9 +148,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             nif = Console.ReadLine();
             Console.WriteLine();
 
-            Soci pare = SociController.buscarPareByNif(nif);
+            string pare = SociController.buscarPareByNif(nif);//No puc posar aqui un objecte
 
-            if (pare != null)
+            if (pare != "")
             {
                 Console.WriteLine(pare.ToString());
                 Console.WriteLine();
@@ -162,10 +160,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine("Numero de soci: " + nsoci);
                 sociHash.Add("Nom", nom);
                 sociHash.Add("Soci", nsoci);
-                sociHash.Add("SociPare", pare.Nsoci);
+                sociHash.Add("SociPare", pare);//corregir això
 
                 SociController.addSociInfantil(sociHash);
-
             }
             else
             {
@@ -176,7 +173,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public void eliminarSoci()
         {
             int nSoci;
-            Soci sociTrobat;
+            string sociTrobat;
             bool encontrado=false;
             int opcio;
 
@@ -186,8 +183,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine("Eliminar Soci:");
                 Console.Write("Introdueix el número de Soci: ");
                 nSoci = int.Parse(Console.ReadLine());
-                sociTrobat = SociController.trobaSoci(nSoci);
-                if (sociTrobat != null)
+                sociTrobat = SociController.trobaSociString(nSoci);
+                if (sociTrobat != "")
                 {
                     Console.WriteLine(sociTrobat.ToString());
                     Console.WriteLine();
@@ -205,7 +202,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 else
                 {
                     Console.WriteLine("No hi ha cap soci amb aquest número. ");                    
-
                 }
             } while (!encontrado);  //"0".Contains(opcion);
 
@@ -213,7 +209,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         public void mostrarSocis()
         {
             int opcio;
-
             Console.WriteLine();
             Console.WriteLine("Mostrar Socis:");
             Console.WriteLine("Tria la opció:");
@@ -265,5 +260,40 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     break;
             }
         }
+        public void facturaMensualSoci()
+        {
+            int nSoci;
+            string sociTrobat;
+            decimal quotaMensual, quotaExcursions;            
+
+            Console.WriteLine();
+            Console.WriteLine("Factura mensual Socis: ");
+            Console.Write("Introdueix el número de soci: ");
+            nSoci = int.Parse(Console.ReadLine());
+            sociTrobat = SociController.trobaSociString(nSoci);
+            if (sociTrobat != "")
+            {
+                Console.WriteLine();
+                Console.WriteLine(sociTrobat.ToString());
+                Console.WriteLine();
+                quotaMensual = SociController.getQuotaMensual(sociTrobat);
+                Console.WriteLine("Quota de soci Mensual: ");
+                Console.WriteLine(quotaMensual + "Euros");
+                quotaExcursions= SociController.getQuotaExcursions(sociTrobat);
+                Console.WriteLine();
+                Console.WriteLine("Preu total de les excursions realitzades: ");
+                Console.WriteLine(quotaExcursions + " Euros");
+                Console.WriteLine();
+
+            }
+            else
+            {
+                Console.WriteLine("No hi ha cap soci amb aquest número. ");
+            }
+
+
+
+        }
+
     }
 }

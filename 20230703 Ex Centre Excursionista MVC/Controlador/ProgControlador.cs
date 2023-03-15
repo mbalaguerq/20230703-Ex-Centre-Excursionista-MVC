@@ -23,7 +23,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             vista = new View();
             //Executo la càrrega de dades al fer el New de centre exc.
             datos.carregaParametres();
-
         }
         public void gestionMenu()
         {
@@ -33,7 +32,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             {
                 opcion = vista.vistaMenu();
                 switch (opcion)
-                {                    
+                {
                     case "2.1":
                         afegirExcursio();
                         break;
@@ -59,7 +58,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         mostrarSocis();
                         break;
                     case "3.7":
-                        //facturaMensualSoci();
+                        facturaMensualSoci();
                         break;
                     case "4.1":
                         //afegirInscripcio();
@@ -83,13 +82,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             excursioView.afegirExcursio();
         }
         private void mostrarExcursio()
-        {            
-            List<string> llistaExcursions= datos.llistaExcursions();
-            ExcursioController excursioController= new ExcursioController(datos);
-            ExcursioView excursioView = new ExcursioView(excursioController);             
+        {
+            List<string> llistaExcursions = datos.llistaExcursions();
+            ExcursioController excursioController = new ExcursioController(datos);
+            ExcursioView excursioView = new ExcursioView(excursioController);
             excursioView.mostrarExcursio();
         }
-        private void afegirSociEstandar() 
+        private void afegirSociEstandar()
         {
             SociController sociController = new SociController(datos);
             SociView sociView = new SociView(sociController);
@@ -97,7 +96,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         }
         private void modifAsseg()
         {
-            AssegurController assegurController = new AssegurController(datos);                
+            AssegurController assegurController = new AssegurController(datos);
             AssegurView assegurView = new AssegurView(assegurController);
             assegurView.modifiasseg();
         }
@@ -124,6 +123,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             SociController sociController = new SociController(datos);
             SociView sociView = new SociView(sociController);
             sociView.mostrarSocis();
+        }
+        private void facturaMensualSoci()
+        {
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            sociView.facturaMensualSoci();
         }
     }
 }

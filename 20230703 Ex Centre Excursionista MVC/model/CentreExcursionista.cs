@@ -12,10 +12,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
     enum TipoSeguro
     {
         basic, complert
-
     }
     internal class CentreExcursionista
     {
+        const decimal QUOTA = 10;
         //Aquesta classe farà de clase "datos", ja que és aquí on están tots els arraylist.
 
         private string nom;
@@ -164,7 +164,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             sociStan2.Nom = "Mateu Ardils i Flaquer";
             sociStan2.Nsoci = 375;
             sociStan2.Nif = "44444444D";
-            sociStan.Assegurança = seguro2;
+            sociStan2.Assegurança = seguro2;
             socis.Add(sociStan2);
 
             Infantil sociInf = new Infantil();
@@ -246,8 +246,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return "";
         }
-
-        public Soci getNomPareByNif(string nif)
+        public string getNomPareByNif(string nif)
         {
             foreach (Soci s in socis)
             {
@@ -256,22 +255,37 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                     if (s is SociStandar && (s as SociStandar).Nif.Equals(nif))
                     //Compte amb aquesta linea. 
                     {
-                        return (s as SociStandar);
+                        return (s as SociStandar).ToString();
                     }
                     if (s is Federat && (s as Federat).Nif.Equals(nif))
                     {
-                        return (s as Federat);
+                        return (s as Federat).ToString();
                     }
                 }
             }
-            return null;
+            return "";
         }
-
         private static int _contador = 500;
         public int getNouNSoci()
         {
             _contador++;
             return _contador;
+        }
+        public string getNomSociByNum(int nSociBuscat)
+        {
+            string sociTrobat;
+            //No fa falta fer un New ja que estem buscant un objecte qeu ja existeix. 
+            //Encara que soci es una classe abstracta, el puc capturar
+
+            foreach (Soci soci in socis)
+            {
+                if (soci.Nsoci == nSociBuscat)
+                {
+                    sociTrobat = soci.ToString();
+                    return sociTrobat;
+                }
+            }
+            return "";
         }
         public Soci getSociByNum(int nSociBuscat)
         {
@@ -281,14 +295,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
             foreach (Soci soci in socis)
             {
-                if (soci.Nsoci.Equals(nSociBuscat))
+                if (soci.Nsoci == nSociBuscat)
                 {
                     sociTrobat = soci;
                     return sociTrobat;
                 }
             }
             return null;
-        }
+        }                
         public void actualAsseg(int nSoci)
         {
             Soci modifiSoci = getSociByNum(nSoci);
@@ -334,18 +348,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
-        public void deleteSoci(Soci sociTrobat)
+        public void deleteSoci(string sociTrobat)
         {
             foreach (Soci soci in socis)
             {
-                if (soci.Nsoci == sociTrobat.Nsoci)
+                if (soci.ToString() == sociTrobat)
                 {
                     socis.Remove(soci);
                     return;
                 }
             }
         }
-
         public List<string> llistaSocis(int opcio)
         {
             List<string> llistaSocis = new List<string>();
@@ -395,6 +408,59 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
 
             return llistaSocis;
+        }
+        public decimal getQuotaMensual(string sociTrobat)
+        {
+            decimal quotaMensual;
+
+            foreach (Soci soci in socis) 
+            {
+                if (soci.ToString() == sociTrobat)
+                {
+                    if (soci is SociStandar)
+                    {
+                        return QUOTA;
+                    }
+                    if (soci is Federat)
+                    {
+                        quotaMensual = (QUOTA * 0.95m);//la m indica que el valor es decimal
+                        return quotaMensual;
+                    }
+                    if (soci is Infantil)
+                    {
+                        quotaMensual = (QUOTA * 0.50m);//la m indica que el valor es decimal
+                        return quotaMensual;
+                    }
+                }
+            }
+            return -1;
+        }
+        public decimal getQuotaExcursions(string sociTrobat)
+        {
+            decimal quotaExcursions = 0;
+            decimal quotaFinal = 0;
+
+            foreach (Inscripcio ins in inscripcions)
+            {
+                if (ins.Soci1.ToString() == sociTrobat)
+                {
+                    quotaExcursions += ins.Excursio.Preu;
+
+                    if (ins.Soci1 is Infantil)
+                    {                        
+                        quotaExcursions = quotaFinal;
+                    }
+                    if(ins.Soci1 is SociStandar)
+                    {                       
+                        quotaFinal = quotaExcursions + (ins.Soci1 as SociStandar).Assegurança.Precio;                        
+                    }
+                    if(ins.Soci1 is Federat)
+                    {                       
+                        quotaFinal = quotaExcursions * 0.10m;                        
+                    }
+                }               
+            }
+            return quotaFinal;
         }
 
     }

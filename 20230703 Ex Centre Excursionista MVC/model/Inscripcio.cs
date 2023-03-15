@@ -15,5 +15,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public int NIns { get => nIns; set => nIns = value; }
         internal Excursio Excursio { get => excursio; set => excursio = value; }
         internal Soci Soci1 { get => Soci; set => Soci = value; }
+
+        public override string ToString()
+        {
+            return "Número d'inscripció :" + nIns + "\n" + excursio + "\n";
+        }
     }
 }

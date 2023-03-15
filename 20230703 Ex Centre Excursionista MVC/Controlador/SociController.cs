@@ -25,15 +25,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             string nif = datos.getNomSociByNif(nifC);
             return nif;
         }
-        public Soci buscarPareByNif(string nifC)
+        public string buscarPareByNif(string nifC)
         {
             // llamamos al método getNombreClienteByNif de la clase datos
             // para buscar el nombre del cliente
 
-            Soci pare = datos.getNomPareByNif(nifC);
+            string pare = datos.getNomPareByNif(nifC);
             return pare;
         }
-
         public int nouNSoci()
         {
             int nouNSoci = datos.getNouNSoci();
@@ -61,13 +60,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             Federacio fedeTrobada = datos.triaFede(triaFede);
                 return fedeTrobada;
         }
-
-        public Soci trobaSoci(int nSoci)
+        /*public Soci trobaSoci(int nSoci)
         {
-           Soci sociTrobat= datos.getSociByNum(nSoci);
+         Soci sociTrobat= datos.getSociByNum(nSoci);
+            //return sociTrobat;
+        }*/
+        public string trobaSociString(int nSoci)
+        {
+            string sociTrobat=datos.getNomSociByNum(nSoci);
             return sociTrobat;
         }
-        public void deleteSoci(Soci sociTrobat)
+        public void deleteSoci(string sociTrobat)
         {
             datos.deleteSoci(sociTrobat);            
         }
@@ -77,6 +80,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             llistaSocis = datos.llistaSocis(opcio);
             return llistaSocis;
         }
-        
+        public decimal getQuotaMensual(string sociTrobat)
+        {
+            Decimal quotaMensual;
+            quotaMensual = datos.getQuotaMensual(sociTrobat);
+            return quotaMensual;
+        }
+        public decimal getQuotaExcursions(string sociTrobat)
+        {
+            Decimal quotaExcursions;
+            quotaExcursions = datos.getQuotaExcursions(sociTrobat); 
+            return quotaExcursions;
+        }
     }
 }
