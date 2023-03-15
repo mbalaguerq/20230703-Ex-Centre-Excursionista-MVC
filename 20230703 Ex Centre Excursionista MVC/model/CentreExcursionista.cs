@@ -338,22 +338,59 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             foreach (Soci soci in socis)
             {
-                if(soci.Nsoci == sociTrobat.Nsoci) 
-                { 
-                socis.Remove(soci);
-                 return;
+                if (soci.Nsoci == sociTrobat.Nsoci)
+                {
+                    socis.Remove(soci);
+                    return;
                 }
             }
         }
 
-        public List <string> llistaSocis(int opcio)
+        public List<string> llistaSocis(int opcio)
         {
             List<string> llistaSocis = new List<string>();
 
-            foreach (Soci soci in socis)
+            switch (opcio)
             {
+                case 1:
+                    foreach (Soci soci in socis)
+                    {
+                        llistaSocis.Add(soci.ToString());
+                    }
+                    return llistaSocis;
+
+                case 2:
+                    foreach (Soci soci in socis)
+                    {
+                        if (soci is SociStandar)
+                        {
+                            llistaSocis.Add(soci.ToString());
+                        }
+                    }
+                    return llistaSocis;
+                case 3:
+                    foreach (Soci soci in socis)
+                    {
+                        if (soci is Federat)
+                        {
+                            llistaSocis.Add(soci.ToString());
+                        }
+                    }
+                    return llistaSocis;
+
+                case 4:
+                    foreach (Soci soci in socis)
+                    {
+                        if (soci is Infantil)
+                        {
+                            llistaSocis.Add(soci.ToString());
+                        }
+                    }
+                    return llistaSocis;
 
             }
+
+
 
 
 

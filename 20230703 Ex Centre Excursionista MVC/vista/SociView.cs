@@ -210,7 +210,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             } while (!encontrado);  //"0".Contains(opcion);
 
         }
-
         public void mostrarSocis()
         {
             int opcio;
@@ -223,8 +222,48 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine("3-Llistar els socis Federats: ");
             Console.Write("4-Llistar socis Infantils: ");
             opcio = int.Parse(Console.ReadLine());
-            List<string> llistaSocis = SociController.llistaSocis(opcio); 
-        }
+            Console.WriteLine();
+            List<string> llistaSocis = SociController.llistaSocis(opcio);
 
+            switch (opcio)
+            {
+                case 1:
+                    Console.WriteLine("Socis registrats: ");
+                    foreach (string socis in llistaSocis)
+                    {
+                        Console.WriteLine(socis.ToString());
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+                case 2:
+                    Console.WriteLine("Socis Standar registrats: ");
+                    foreach (string socisS in llistaSocis)
+                    {
+                        Console.WriteLine(socisS.ToString());
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();                    
+                    break;
+                case 3:
+                    Console.WriteLine("Socis federats registrats: ");
+                    foreach (string socisF in llistaSocis)
+                    {
+                        Console.WriteLine(socisF.ToString());
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();                    
+                    break;
+                case 4:
+                    Console.WriteLine("Socis infantils registrats: ");
+                    foreach (string socisI in llistaSocis)
+                    {
+                        Console.WriteLine(socisI.ToString());
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();              
+                    break;
+            }
+        }
     }
 }
