@@ -61,7 +61,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         facturaMensualSoci();
                         break;
                     case "4.1":
-                        //afegirInscripcio();
+                        afegirInscripcio();
                         break;
                     case "4.2":
                         //eliminarInscripcio();
@@ -129,6 +129,15 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             SociController sociController = new SociController(datos);
             SociView sociView = new SociView(sociController);
             sociView.facturaMensualSoci();
+        }
+        private void afegirInscripcio()
+        {
+            InscripcioController inscripcioController = new InscripcioController(datos);
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            InscripcioView inscripcioView = new InscripcioView(inscripcioController, sociController, sociView);            
+            
+            inscripcioView.afegirInscripcio();
         }
     }
 }

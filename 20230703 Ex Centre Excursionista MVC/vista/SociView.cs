@@ -262,12 +262,21 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         }
         public void facturaMensualSoci()
         {
-            int nSoci;
+            int nSoci, month;
             string sociTrobat;
             decimal quotaMensual, quotaExcursions;            
-
+            
             Console.WriteLine();
             Console.WriteLine("Factura mensual Socis: ");
+            Console.WriteLine();
+            Console.WriteLine("Introdueix el mes: ");
+            Console.WriteLine("1- Gener       7-Juliol");
+            Console.WriteLine("2-Febrer       8-Agost");
+            Console.WriteLine("3-Març         9-Setembre");
+            Console.WriteLine("4-Abril       10-Octubre");
+            Console.WriteLine("5-Maig        11-Novembre");
+            Console.Write("6-Juny        12-Desembre:  ");
+            month=int.Parse(Console.ReadLine());
             Console.Write("Introdueix el número de soci: ");
             nSoci = int.Parse(Console.ReadLine());
             sociTrobat = SociController.trobaSociString(nSoci);
@@ -279,21 +288,19 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 quotaMensual = SociController.getQuotaMensual(sociTrobat);
                 Console.WriteLine("Quota de soci Mensual: ");
                 Console.WriteLine(quotaMensual + "Euros");
-                quotaExcursions= SociController.getQuotaExcursions(sociTrobat);
+                quotaExcursions= SociController.getQuotaExcursions(sociTrobat, month);
                 Console.WriteLine();
                 Console.WriteLine("Preu total de les excursions realitzades: ");
                 Console.WriteLine(quotaExcursions + " Euros");
                 Console.WriteLine();
-
+                Console.WriteLine("Total Factura: ");
+                Console.WriteLine(quotaMensual + quotaExcursions + " Euros");
+                Console.WriteLine();
             }
             else
             {
                 Console.WriteLine("No hi ha cap soci amb aquest número. ");
-            }
-
-
-
+            }            
         }
-
     }
 }

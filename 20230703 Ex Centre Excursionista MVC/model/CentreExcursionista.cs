@@ -207,14 +207,19 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         }
         public List<string> llistaExcursions()
         {
+            DateTime date = DateTime.Now;
             List<string> llistaExcursions = new List<string>();
             foreach (Excursio veh in excursions)
             {
-                llistaExcursions.Add(veh.Descripcio + "\t" + veh.Codi + "\t" + veh.Data + "\t" +
-                    veh.Ndies + "\t" + veh.Preu + "\t");
+                if (date > veh.Data)
+                {
+
+                    llistaExcursions.Add(veh.Descripcio + "\t" + veh.Codi + "\t" + veh.Data + "\t" +
+                        veh.Ndies + "\t" + veh.Preu + "\t");
+                }
             }
             return llistaExcursions;
-        }
+        }       
         public List<string> buscarExcursio(Hashtable dates)
         {
             List<string> trobades = new List<string>();
@@ -270,6 +275,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             _contador++;
             return _contador;
+        }
+        private static int _inscripcio = 1000;
+        public int GetNinscripcio()
+        {
+            _inscripcio++;
+            return _inscripcio;
         }
         public string getNomSociByNum(int nSociBuscat)
         {
@@ -435,14 +446,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return -1;
         }
-        public decimal getQuotaExcursions(string sociTrobat)
+        public decimal getQuotaExcursions(string sociTrobat, int month)
         {
             decimal quotaExcursions = 0;
-            decimal quotaFinal = 0;
+            decimal quotaFinal = 0;            
 
             foreach (Inscripcio ins in inscripcions)
             {
-                if (ins.Soci1.ToString() == sociTrobat)
+                if (ins.Soci1.ToString() == sociTrobat && ins.Excursio.Data.Month == month)
                 {
                     quotaExcursions += ins.Excursio.Preu;
 
@@ -463,5 +474,25 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             return quotaFinal;
         }
 
+        public Hashtable buscaInscripcio(Hashtable infoHash)
+        {           
+            foreach (Excursio excursio in excursions) 
+            {
+                if(excursio.Codi == (int)infoHash["codiExc"])
+                {
+                    infoHash.Add("Excursio", excursio);
+                }
+            }
+            foreach (Soci soci in socis)
+            {
+                if(soci.Nsoci == (int)infoHash["nSoci"])
+                {
+                    infoHash.Add("Soci", soci);
+                }
+            }
+            addInscripcio(infoHash);
+
+            return infoHash;
+        }
     }
 }

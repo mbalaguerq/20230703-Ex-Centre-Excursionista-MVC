@@ -86,10 +86,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             quotaMensual = datos.getQuotaMensual(sociTrobat);
             return quotaMensual;
         }
-        public decimal getQuotaExcursions(string sociTrobat)
+        public decimal getQuotaExcursions(string sociTrobat, int month)
         {
             Decimal quotaExcursions;
-            quotaExcursions = datos.getQuotaExcursions(sociTrobat); 
+            quotaExcursions = datos.getQuotaExcursions(sociTrobat, month); 
             return quotaExcursions;
         }
     }
