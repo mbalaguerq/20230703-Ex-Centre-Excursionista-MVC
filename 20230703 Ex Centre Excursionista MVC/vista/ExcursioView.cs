@@ -29,7 +29,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             int ndies;
 
             Console.WriteLine();
-            Console.WriteLine("Nova Inscripció: ");
+            Console.WriteLine("Nova Excursió: ");
             Console.WriteLine();
             Console.Write("Descripció: ");
             descripcio= Console.ReadLine();

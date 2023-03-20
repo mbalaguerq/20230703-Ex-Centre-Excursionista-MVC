@@ -13,10 +13,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             bool salir = false;
                        
-            Console.WriteLine("1.Gestión Excursiones ");
-            Console.WriteLine("2.Gestión de Socios ");
-            Console.WriteLine("3.Gestión de Inscripciones ");            
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("1.Gestió Excursions ");
+            Console.WriteLine("2.Gestió de Socis ");
+            Console.WriteLine("3.Gestió d'Inscripcions ");            
+            Console.WriteLine("0. Sortir");
             Console.WriteLine();
             opcion = pedirOpcionMenu();
             do
@@ -50,9 +50,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {            
             string opcion;
             Console.WriteLine();
-            Console.WriteLine("1.Añadir Excusión ");
-            Console.WriteLine("2.Mostrar Excusiones");// con filtro entre fechas                                                                 
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("1.Afegir Excusió ");
+            Console.WriteLine("2.Mostrar Excusions");// con filtro entre fechas                                                                 
+            Console.WriteLine("0. Sortir");
             opcion = pedirOpcionMenuExc();
             
             switch (opcion)
@@ -81,14 +81,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {
             string opcion;
             Console.WriteLine();
-            Console.WriteLine("1.Añadir Socio Estándar ");
-            Console.WriteLine("2.Modificar tipo de seguro de un socio estándar ");       
-            Console.WriteLine("3.Añadir Socio Federado ");
-            Console.WriteLine("4.Añadir Socio Infantil ");
-            Console.WriteLine("5.Eliminar socio ");
-            Console.WriteLine("6.Mostrar Socios"); //(Todos o por tipo de socio)
-            Console.WriteLine("7.Mostrar Factura mensual por socios ");
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("1.Afegir Soci Standar ");
+            Console.WriteLine("2.Modificar tipus d'assegurança d'un soci Sstandar ");       
+            Console.WriteLine("3.Afegir Soci Federat ");
+            Console.WriteLine("4.Afegir Soci Infantil ");
+            Console.WriteLine("5.Eliminar soci ");
+            Console.WriteLine("6.Mostrar Socis"); //(Todos o por tipo de socio)
+            Console.WriteLine("7.Mostrar Factura mensual per socis ");
+            Console.WriteLine("0.Sortir");
             opcion = pedirOpcionMenuSocio();
             switch (opcion)
             {
@@ -126,10 +126,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {
             string opcion;
             Console.WriteLine();
-            Console.WriteLine("1.Añadir Inscripción ");
-            Console.WriteLine("2.Eliminar Inscripción ");
-            Console.WriteLine("3.Mostar inscripciones");// con las opciones de filtrar por socio y/o fecha           
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("1.Afegir Inscripció ");
+            Console.WriteLine("2.Eliminar Inscripció ");
+            Console.WriteLine("3.Mostar inscripcions");// con las opciones de filtrar por socio y/o fecha           
+            Console.WriteLine("0. Sortir");
             opcion = pedirOpcionMenuIns();
             switch (opcion)
             {
@@ -138,7 +138,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 case "2":
                     return "4.2"; //eliminarInscripcio();                    
                 case "3":
-                    return "4.3"; //mostrarInscripcions();
+                    return menuLlistaIns(); //mostrarInscripcions();
                 default:
                     return "0";
             }
@@ -152,6 +152,38 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
             } while (!"0123".Contains(opcion));
+
+            return opcion;
+        }
+        public string menuLlistaIns()
+        {
+            string opcion;
+            Console.WriteLine();
+            Console.WriteLine("1.Filtrar per Soci: ");
+            Console.WriteLine("2.Filtrar per Data: ");                       
+            Console.WriteLine("0. Sortir");
+            opcion = pedirOpcionListaIns();
+
+            switch (opcion)
+            {
+                case "1":
+                    return "5.1"; //LlistaInscripBySoci();                    
+                case "2":
+                    return "5.2"; //LlistaInscripByData();                    
+                
+                default:
+                    return "0";
+            }
+        }
+        private string pedirOpcionListaIns()
+        {
+            string opcion;
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Opcion: ");
+                opcion = Console.ReadLine();
+            } while (!"012".Contains(opcion));
 
             return opcion;
         }

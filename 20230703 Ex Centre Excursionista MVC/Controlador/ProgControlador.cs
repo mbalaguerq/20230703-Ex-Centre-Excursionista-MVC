@@ -64,10 +64,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         afegirInscripcio();
                         break;
                     case "4.2":
-                        //eliminarInscripcio();
+                        eliminarInscripcio();
                         break;
-                    case "7":
-                        //mostrarInscripcions();
+                    case "5.1":
+                        llistaInscripBySoci();
+                        break;
+                    case "5.2":
+                        LlistaInscripByData();
                         break;
                     case "0":
                         salir = true;
@@ -138,6 +141,33 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             InscripcioView inscripcioView = new InscripcioView(inscripcioController, sociController, sociView);            
             
             inscripcioView.afegirInscripcio();
+        }
+        private void eliminarInscripcio()
+        {
+            InscripcioController inscripcioController = new InscripcioController(datos);
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            InscripcioView inscripcioView = new InscripcioView(inscripcioController, sociController, sociView);
+
+            inscripcioView.eliminarInscripcio();
+        }
+        private void llistaInscripBySoci()
+        {
+            InscripcioController inscripcioController = new InscripcioController(datos);
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            InscripcioView inscripcioView = new InscripcioView(inscripcioController, sociController, sociView);
+
+            inscripcioView.llistaInscripBySoci();
+        }
+        private void LlistaInscripByData()
+        {
+            InscripcioController inscripcioController = new InscripcioController(datos);
+            SociController sociController = new SociController(datos);
+            SociView sociView = new SociView(sociController);
+            InscripcioView inscripcioView = new InscripcioView(inscripcioController, sociController, sociView);
+
+            inscripcioView.LlistaInscripByData();
         }
     }
 }

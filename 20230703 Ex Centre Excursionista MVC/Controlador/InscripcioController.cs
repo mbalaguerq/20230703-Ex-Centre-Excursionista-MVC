@@ -20,13 +20,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         public string GetSocibyNumero(int nSoci)
         {
             string nSociTrobat;
-            nSociTrobat= datos.getNomSociByNum(nSoci);
+            nSociTrobat = datos.getNomSociByNum(nSoci);
             return nSociTrobat;
         }
         public List<string> excurDisponibles()
         {
             List<string> list = new List<string>();
-            list=datos.llistaExcursions();
+            list = datos.llistaExcursions();
             return list;
         }
         public int GetNinscripcio()
@@ -39,9 +39,21 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             Hashtable dades = new Hashtable();
             dades = datos.buscaInscripcio(inscripHash);
-                return dades;
+            return dades;
         }
+        public List<string> GetInscripcioBySoci(int nSoci)
+        {
+            List<string> list = new List<string>();
+            list = datos.GetInscripcioBySoci(nSoci);
+            return list;
+        }
+        public bool DeleteInscripcio(int nIns)
+        {
+           
+           bool ret= datos.DeleteInscripcio(nIns);
 
+            return ret;
+        }
 
 
 

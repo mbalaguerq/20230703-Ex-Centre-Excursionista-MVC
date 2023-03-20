@@ -202,8 +202,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             i4.Excursio = excursio2;
             i4.Soci1 = sociInf2;
             inscripcions.Add(i4);
-
-
         }
         public List<string> llistaExcursions()
         {
@@ -211,7 +209,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             List<string> llistaExcursions = new List<string>();
             foreach (Excursio veh in excursions)
             {
-                if (date > veh.Data)
+                if (date < veh.Data)
                 {
 
                     llistaExcursions.Add(veh.Descripcio + "\t" + veh.Codi + "\t" + veh.Data + "\t" +
@@ -473,7 +471,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return quotaFinal;
         }
-
         public Hashtable buscaInscripcio(Hashtable infoHash)
         {           
             foreach (Excursio excursio in excursions) 
@@ -487,12 +484,40 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             {
                 if(soci.Nsoci == (int)infoHash["nSoci"])
                 {
-                    infoHash.Add("Soci", soci);
+                    infoHash.Add("SociNom", soci.Nom);
                 }
             }
             addInscripcio(infoHash);
 
             return infoHash;
+        }
+        public List<string> GetInscripcioBySoci(int nSoci)
+        {
+            List<string> inscrip = new List<string>();
+            foreach(Inscripcio ins  in inscripcions)
+            {
+                if(ins.Soci1.Nsoci==nSoci)
+                {
+                    inscrip.Add(ins.ToString());
+                }
+                return inscrip;
+            }
+            return null;
+        }
+        public bool DeleteInscripcio(int nIns)
+        {
+            bool ret=false;
+
+            foreach (Inscripcio ins in inscripcions)
+            {
+                if (ins.NIns == nIns)
+                {
+                    inscripcions.Remove(ins);
+                    ret = true;
+                    return ret;
+                }               
+            }
+            return ret;
         }
     }
 }
