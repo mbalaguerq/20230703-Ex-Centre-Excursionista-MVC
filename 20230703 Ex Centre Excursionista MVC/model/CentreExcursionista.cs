@@ -99,7 +99,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Excursio excursio = new Excursio();
             excursio.Ndies = 3;
             excursio.Preu = 200;
-            excursio.Codi = 49017805;
+            excursio.Codi = 001;
             excursio.Data = DateTime.Parse("01/05/2023");
             excursio.Descripcio = "Anada i tornada a Montserrat a peu";
             excursions.Add(excursio);
@@ -107,7 +107,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Excursio excursio2 = new Excursio();
             excursio2.Ndies = 1;
             excursio2.Preu = 90;
-            excursio2.Codi = 49010800;
+            excursio2.Codi = 002;
             excursio2.Data = DateTime.Parse("05/06/2023");
             excursio2.Descripcio = "Anada i tornada a la Cerdanya";
             excursions.Add(excursio2);
@@ -115,7 +115,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             Excursio excursio3 = new Excursio();
             excursio3.Ndies = 4;
             excursio3.Preu = 760;
-            excursio3.Codi = 58020600;
+            excursio3.Codi = 003;
             excursio3.Data = DateTime.Parse("20/05/2023");
             excursio3.Descripcio = "Pica d'Estats";
             excursions.Add(excursio3);
@@ -224,7 +224,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             List<string> trobades = new List<string>();
             foreach (Excursio exc in excursions)
             {
-                if (exc.Data >= DateTime.Parse((string)dates["DataI"]) && exc.Data <= DateTime.Parse((string)dates["DataF"]))
+                if (exc.Data >= (DateTime)dates["DataI"] && exc.Data <= (DateTime)dates["DataF"])
                 {
                     trobades.Add(exc.ToString());
                 }
@@ -269,17 +269,25 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return "";
         }
+
         private static int _contador = 500;
+        private static int _inscripcio = 1000;
+        private static int _excursio = 004;
+
         public int getNouNSoci()
         {
             _contador++;
             return _contador;
-        }
-        private static int _inscripcio = 1000;
+        }       
         public int GetNinscripcio()
         {
             _inscripcio++;
             return _inscripcio;
+        }        
+        public int GetNouCodiExc()
+        {
+            _excursio++;
+            return _excursio; 
         }
         public string getNomSociByNum(int nSociBuscat)
         {

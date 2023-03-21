@@ -28,5 +28,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
            
             return list;
         }
+        public int GetNouCodiExc()
+        {
+            int codi;
+            codi = datos.GetNouCodiExc();
+            return codi;
+        }
     }
 }

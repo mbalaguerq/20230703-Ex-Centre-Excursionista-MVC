@@ -23,7 +23,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public override string ToString()
 
         {
-            return "Excursió: " +  Descripcio + "\n" + "Codi: " + Codi + "\n" + "Data: " +  Data + "\n" +
+            return "Excursió: " +  Descripcio + "\n" + "Codi: " + Codi + "\n" + "Data: " +  Data.ToShortDateString() + "\n" +
                    "Preu: " + Preu + "\n" + "Número de dies: " + Ndies + "\n";
         }
     }
