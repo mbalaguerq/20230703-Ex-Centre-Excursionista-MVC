@@ -24,26 +24,34 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine();
             Console.WriteLine("Modificació d'assegurança: ");
             Console.WriteLine();
+
+
             Console.WriteLine("Introdueix el número de soci: ");
-            nSoci=int.Parse(Console.ReadLine());
+            nSoci = int.Parse(Console.ReadLine());
+
+
             sociString = assegurController.getSociByNumero(nSoci);
             Console.WriteLine(sociString);
-            resposta= confirmCanvi();
-            if(resposta.Equals("1"))
-                {
+            resposta = confirmCanvi();
+            if (resposta.Equals("1"))
+            {
                 assegurController.actualAsseg(nSoci);
+                Console.WriteLine("Assegurança modificada satisfactoriament");
             }
-
-
+            else
+            {
+                Console.WriteLine("Assegurança NO modificada");
+            }
+            Console.WriteLine();
         }
         public string confirmCanvi()
         {
-            string resposta ;
+            string resposta;
             do
             {
                 Console.WriteLine();
                 Console.WriteLine("Desitja canviar el tipus d'Assegurança?:");
-                Console.Write("1  SI.\t 2 NO");
+                Console.Write("1  SI.\t 2 NO ");
                 resposta = Console.ReadLine();
                 resposta.ToLower();
             } while (!resposta.Equals("1") && !resposta.Equals("2"));

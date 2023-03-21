@@ -22,11 +22,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {
             Hashtable sociHash = new Hashtable();
             int nsoci;
-            string nom, nif, tipAss;
+            string nom, nif, tipAss, resposta;
             TipoSeguro tipus;
 
             Console.WriteLine();
-            Console.WriteLine("Nou Soci:");
+            Console.WriteLine("NOU SOCI: ");
+            Console.WriteLine();
             Console.Write("Introdueix Nif:");
             nif = Console.ReadLine();
             Console.WriteLine();
@@ -38,6 +39,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             if (exist.Equals(nif))
             {
                 Console.WriteLine("El Soci ja existeix");
+                Console.WriteLine();
             }
             else
             {
@@ -74,8 +76,26 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     }
                 } while (!"12".Contains(tipAss));
                 Console.WriteLine();
-
-                SociController.addSociStan(sociHash);
+                Console.WriteLine("REVISI LES DADES:");
+                Console.WriteLine();
+                Console.WriteLine("NIF: " + nif);
+                Console.WriteLine("NOM: " + nom);
+                Console.WriteLine("N.SOCI " + nsoci);
+                Console.WriteLine(sociHash ["Assegurança"].ToString());
+                Console.WriteLine();
+                Console.WriteLine("Confirmar Alta: S/N");
+                resposta = Console.ReadLine();
+                resposta.ToLower();
+                if(resposta.Equals("s"))
+                {
+                    SociController.addSociStan(sociHash);
+                    Console.WriteLine("El soci s'ha afegit correctament.");
+                }
+                else
+                {
+                    Console.WriteLine("Operació cancelada.");
+                }
+                Console.WriteLine();
             }
         }
         public void afegirSociFederat()
