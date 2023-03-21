@@ -18,7 +18,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public override string ToString()
         {
-            return "Número d'inscripció :" + nIns + "\n" + excursio + "\n";
+            return "Número d'inscripció :" + nIns + "\n" + excursio + "\n" + Soci1.Nom;
         }
     }
 }

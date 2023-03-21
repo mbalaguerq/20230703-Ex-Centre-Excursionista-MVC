@@ -59,12 +59,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             Federacio fedeTrobada = datos.triaFede(triaFede);
                 return fedeTrobada;
-        }
-        /*public Soci trobaSoci(int nSoci)
-        {
-         Soci sociTrobat= datos.getSociByNum(nSoci);
-            //return sociTrobat;
-        }*/
+        }        
         public string trobaSociString(int nSoci)
         {
             string sociTrobat=datos.getNomSociByNum(nSoci);

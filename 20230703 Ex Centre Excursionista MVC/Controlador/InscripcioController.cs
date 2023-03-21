@@ -54,6 +54,19 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
 
             return ret;
         }
+        public List<string> GetInscripBySoci(int nSoci)
+        {
+            List<string> list = new List<string>();
+            list = datos.GetInscripBySoci(nSoci);
+            return list;
+        }
+        public List<string> GetInscripByData(Hashtable dataHash)
+        {
+            List<String> list = new List<String>();
+            list = datos.GetInscripByData(dataHash);
+
+            return list;
+        }
 
 
 

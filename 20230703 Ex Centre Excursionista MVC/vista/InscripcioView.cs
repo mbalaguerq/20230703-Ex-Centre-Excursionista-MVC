@@ -29,17 +29,17 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
 
             int nIns, codiExc, nSoci;
             string sociTrobat;
-            List<string>excurDisponibles = new List<string>();
-           
+            List<string> excurDisponibles = new List<string>();
+
 
             Console.WriteLine();
             Console.WriteLine("Nova Inscripció");
             Console.WriteLine();
             Console.Write("Introdueix el Número de Soci: ");
-            nSoci=int.Parse(Console.ReadLine());
-            sociTrobat= inscripcioController.GetSocibyNumero(nSoci);            
+            nSoci = int.Parse(Console.ReadLine());
+            sociTrobat = inscripcioController.GetSocibyNumero(nSoci);
 
-            if ( sociTrobat == "" ) 
+            if (sociTrobat == "")
             {
                 Console.WriteLine();
                 Console.WriteLine("No hi ha cap soci amb aquest número.");
@@ -53,16 +53,16 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine();
             Console.WriteLine("Excursions disponibles :");
             excurDisponibles = inscripcioController.excurDisponibles();
-            foreach(string Exc in excurDisponibles) 
+            foreach (string Exc in excurDisponibles)
             {
                 Console.WriteLine(Exc);
 
             }
-            
+
             Console.WriteLine();
             Console.Write("Introdueix el Codi de la Excursió triada :");
             codiExc = int.Parse(Console.ReadLine());
-                       
+
             nIns = inscripcioController.GetNinscripcio();
             Console.WriteLine("Número d'inscripció:  " + nIns);
 
@@ -70,25 +70,25 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             inscripHash.Add("Ninscripcio", nIns);
             inscripHash.Add("codiExc", codiExc);
 
-            mostrar= inscripcioController.addInscripcio(inscripHash);
+            mostrar = inscripcioController.addInscripcio(inscripHash);
 
             Console.WriteLine();
             Console.WriteLine("Inscripció realitzada amb èxit");
             Console.WriteLine("Resum de la seva inscripció: ");
-            Console.WriteLine("Número d'inscripció: " + nIns);            
+            Console.WriteLine("Número d'inscripció: " + nIns);
             Console.WriteLine("Soci: " + mostrar["nSoci"]);
             Console.WriteLine("Soci: " + mostrar["SociNom"]);
             Console.WriteLine();
             Console.WriteLine(mostrar["Excursio"]);
         }
         public void eliminarInscripcio()
-        {            
+        {
             List<string> excurContractades = new List<string>();
             int nSoci, nIns;
             string sociTrobat;
-            bool sociExists=false;
+            bool sociExists = false;
             bool eliminat = true;
-            
+
             do
             {
                 Console.WriteLine();
@@ -109,8 +109,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     Console.WriteLine(sociTrobat.ToString());
                     sociExists = true;
                 }
-            }while (!sociExists);
-            
+            } while (!sociExists);
+
             excurContractades = inscripcioController.GetInscripcioBySoci(nSoci);
             if (excurContractades == null)
             {
@@ -119,8 +119,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             else
             {
                 foreach (string s in excurContractades)
-                {                   
-                    Console.WriteLine(s);                    
+                {
+                    Console.WriteLine(s);
                 }
                 do
                 {
@@ -138,17 +138,74 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     {
                         Console.WriteLine("No existeix aquest número d'inscripció");
                     }
-                }while(!eliminat);
+                } while (!eliminat);
             }
         }
         public void llistaInscripBySoci()
         {
-            Console.WriteLine();
-            Console.WriteLine("Eliminar Inscripció");
-            Console.WriteLine();
-            Console.WriteLine("Filtrar per n de Soci:");
-            Console.WriteLine("Filtrar per data:");
+            int nSoci;
+            string sociTrobat;
+            bool trobat = false;
+            List<string> inscripcions = new List<string>();
 
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("LLISTA D'INSCRIPCIONS:");
+                Console.WriteLine();
+                Console.Write("Introdueix el Número de Soci: ");
+                nSoci = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+                sociTrobat = inscripcioController.GetSocibyNumero(nSoci);
+
+                if (sociTrobat == "")
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("No hi ha cap soci amb aquest número.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    trobat = true;
+                }
+            } while (!trobat);
+            inscripcions = inscripcioController.GetInscripBySoci(nSoci);
+
+            foreach (string s in inscripcions)
+            {
+                Console.WriteLine(s);
+
+            }
+            Console.WriteLine();
+        }
+
+        public void LlistaInscripByData()
+        {
+            Console.WriteLine();
+            Hashtable HashData = new Hashtable();
+            List<string> inscripcions = new List<string>();
+
+            DateTime dataI, dataF;
+
+            Console.WriteLine();
+            Console.WriteLine("LLISTA D'INSCRIPCIONS:");
+            Console.WriteLine();
+            Console.WriteLine("Data d'inici: ");
+            dataI = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Data Final: ");
+            dataF = DateTime.Parse(Console.ReadLine());
+
+            HashData.Add("DataI", dataI);
+            HashData.Add("DataF", dataF);
+
+            inscripcions = inscripcioController.GetInscripByData(HashData);
+
+            foreach (string s in inscripcions)
+            {
+                Console.WriteLine(s);
+
+            }
+            Console.WriteLine();
         }
     }
 }

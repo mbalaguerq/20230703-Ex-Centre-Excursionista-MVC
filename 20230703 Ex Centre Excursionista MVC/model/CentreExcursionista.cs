@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -217,7 +218,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 }
             }
             return llistaExcursions;
-        }       
+        }
         public List<string> buscarExcursio(Hashtable dates)
         {
             List<string> trobades = new List<string>();
@@ -311,7 +312,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 }
             }
             return null;
-        }                
+        }
         public void actualAsseg(int nSoci)
         {
             Soci modifiSoci = getSociByNum(nSoci);
@@ -422,7 +423,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             decimal quotaMensual;
 
-            foreach (Soci soci in socis) 
+            foreach (Soci soci in socis)
             {
                 if (soci.ToString() == sociTrobat)
                 {
@@ -447,7 +448,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public decimal getQuotaExcursions(string sociTrobat, int month)
         {
             decimal quotaExcursions = 0;
-            decimal quotaFinal = 0;            
+            decimal quotaFinal = 0;
 
             foreach (Inscripcio ins in inscripcions)
             {
@@ -456,33 +457,33 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                     quotaExcursions += ins.Excursio.Preu;
 
                     if (ins.Soci1 is Infantil)
-                    {                        
+                    {
                         quotaExcursions = quotaFinal;
                     }
-                    if(ins.Soci1 is SociStandar)
-                    {                       
-                        quotaFinal = quotaExcursions + (ins.Soci1 as SociStandar).Assegurança.Precio;                        
+                    if (ins.Soci1 is SociStandar)
+                    {
+                        quotaFinal = quotaExcursions + (ins.Soci1 as SociStandar).Assegurança.Precio;
                     }
-                    if(ins.Soci1 is Federat)
-                    {                       
-                        quotaFinal = quotaExcursions * 0.10m;                        
+                    if (ins.Soci1 is Federat)
+                    {
+                        quotaFinal = quotaExcursions * 0.10m;
                     }
-                }               
+                }
             }
             return quotaFinal;
         }
         public Hashtable buscaInscripcio(Hashtable infoHash)
-        {           
-            foreach (Excursio excursio in excursions) 
+        {
+            foreach (Excursio excursio in excursions)
             {
-                if(excursio.Codi == (int)infoHash["codiExc"])
+                if (excursio.Codi == (int)infoHash["codiExc"])
                 {
                     infoHash.Add("Excursio", excursio);
                 }
             }
             foreach (Soci soci in socis)
             {
-                if(soci.Nsoci == (int)infoHash["nSoci"])
+                if (soci.Nsoci == (int)infoHash["nSoci"])
                 {
                     infoHash.Add("SociNom", soci.Nom);
                 }
@@ -494,9 +495,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         public List<string> GetInscripcioBySoci(int nSoci)
         {
             List<string> inscrip = new List<string>();
-            foreach(Inscripcio ins  in inscripcions)
+            foreach (Inscripcio ins in inscripcions)
             {
-                if(ins.Soci1.Nsoci==nSoci)
+                if (ins.Soci1.Nsoci == nSoci)
                 {
                     inscrip.Add(ins.ToString());
                 }
@@ -506,7 +507,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         }
         public bool DeleteInscripcio(int nIns)
         {
-            bool ret=false;
+            bool ret = false;
 
             foreach (Inscripcio ins in inscripcions)
             {
@@ -515,9 +516,60 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                     inscripcions.Remove(ins);
                     ret = true;
                     return ret;
-                }               
+                }
             }
             return ret;
+        }
+        public List<string> GetInscripBySoci(int nSoci)
+
+        {
+            List<string> inscrip = new List<string>();
+           
+            foreach (Inscripcio ins in inscripcions)
+            {
+                if (ins.Soci1.Nsoci == nSoci)
+                {
+                    inscrip.Add("Num. Soci: " +  ins.Soci1.Nsoci.ToString());
+                    inscrip.Add("Nom: " + ins.Soci1.Nom.ToString());
+                    inscrip.Add("Data: " + ins.Excursio.Data.ToString());
+                    inscrip.Add("Excursió: " + ins.Excursio.Descripcio.ToString());
+                    if (ins.Soci1 is Federat)
+                    {                      
+                        inscrip.Add("Preu: " + (ins.Excursio.Preu * 0,9).ToString() + " Euros");
+                    }
+                    else
+                    {
+                        inscrip.Add("Preu: " + ins.Excursio.Preu.ToString() + " Euros");
+                    }
+                }
+                return inscrip;
+            }
+            return null;
+        }
+        public List<string> GetInscripByData(Hashtable dates) 
+        {
+            List<string> inscrip = new List<string>();
+
+            foreach(Inscripcio ins in inscripcions)            
+            {
+                if (ins.Excursio.Data >= (DateTime)dates["DataI"] && ins.Excursio.Data <= (DateTime)dates["DataF"])
+             
+                {
+                    inscrip.Add("Num. Soci: " + ins.Soci1.Nsoci.ToString());
+                    inscrip.Add("Nom: " + ins.Soci1.Nom.ToString());
+                    inscrip.Add("Data: " + ins.Excursio.Data.ToString());
+                    inscrip.Add("Excursió: " + ins.Excursio.Descripcio.ToString());
+                    if (ins.Soci1 is Federat)
+                    {
+                        inscrip.Add("Preu: " + (ins.Excursio.Preu * 0, 9).ToString() + " Euros");
+                    }
+                    else
+                    {
+                        inscrip.Add("Preu: " + ins.Excursio.Preu.ToString() + " Euros");
+                    }
+                }
+            }
+            return inscrip;
         }
     }
 }
