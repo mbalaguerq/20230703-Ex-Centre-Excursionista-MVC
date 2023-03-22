@@ -321,6 +321,28 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
+
+        public int buscarnSociPareByNif(string nif)
+        {
+            int nSociPare=0;
+
+            foreach (Soci soci in socis)
+            {
+                if(soci is Federat && (soci as Federat).Nif.Equals(nif))
+
+                {
+                    (soci as Federat).Nsoci = nSociPare;
+                    return nSociPare;
+                }
+                if (soci is SociStandar && (soci as SociStandar).Nif.Equals(nif))
+
+                {
+                    (soci as SociStandar).Nsoci = nSociPare;
+                    return nSociPare;
+                }                
+            }
+            return -1;
+        }
         public void actualAsseg(int nSoci)
         {
             Soci modifiSoci = getSociByNum(nSoci);
@@ -357,7 +379,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
-        public Federacio triaFede(int triaFede)
+        /*public Federacio triaFede(int triaFede)
         {
             foreach (Federacio fede in federacions)
             {
@@ -365,7 +387,24 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 { return fede; }
             }
             return null;
+        }*/
+        public void addSociFederat(Hashtable fedeHash, int triaFede)
+        {
+            Federacio fedeaux = new Federacio();
+
+            foreach (Federacio fede in federacions)
+            {
+                if (fede.Codi == triaFede)
+                {
+                    fedeaux.Codi = fede.Codi;
+                    fedeaux.Nom=fede.Nom;
+                }
+            }
+            fedeHash.Add("Federació",fedeaux);
+            
+            addFederat(fedeHash);
         }
+
         public void deleteSoci(string sociTrobat)
         {
             foreach (Soci soci in socis)

@@ -33,6 +33,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             string pare = datos.getNomPareByNif(nifC);
             return pare;
         }
+        public int buscarnSociPareByNif(string nif)
+        {
+            int nSociPare= datos.buscarnSociPareByNif(nif);
+            return nSociPare;
+        }
         public int nouNSoci()
         {
             int nouNSoci = datos.getNouNSoci();
@@ -55,11 +60,16 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             datos.addSociInfantil(sociHash);
         }
-        public Federacio triaFede(int triaFede)
+        /*public Federacio triaFede(int triaFede)
         {
             Federacio fedeTrobada = datos.triaFede(triaFede);
                 return fedeTrobada;
-        }        
+        } */
+
+        public void addSociFederat(Hashtable fedeHash, int codi)
+        {
+            datos.addSociFederat(fedeHash, codi);
+        }
         public string trobaSociString(int nSoci)
         {
             string sociTrobat=datos.getNomSociByNum(nSoci);

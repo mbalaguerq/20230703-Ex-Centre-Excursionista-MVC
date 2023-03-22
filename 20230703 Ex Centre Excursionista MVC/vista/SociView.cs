@@ -106,8 +106,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             int triaFede;
 
             Console.WriteLine();
-            Console.WriteLine("Nou Soci Federat :");
-            Console.Write("Introdueix Nif:");
+            Console.WriteLine("NOU SOCI FEDERAT: ");
+            Console.Write("Introdueix Nif: ");
             nif = Console.ReadLine();
             Console.WriteLine();
 
@@ -138,37 +138,35 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     if (triaFede == 1)
                     {
                         triaFede = 001;
-                        SociController.triaFede(triaFede);
-
-                        Federacio fedeTrobada = SociController.triaFede(triaFede);
-                        sociHash.Add("Federacio", fedeTrobada);
+                       
+                        SociController.addSociFederat(sociHash,triaFede);                        
                     }
                     if (triaFede == 2)
                     {
                         triaFede = 002;
-                        SociController.triaFede(triaFede);
-
-                        Federacio fedeTrobada = SociController.triaFede(triaFede);
-                        sociHash.Add("Federacio", fedeTrobada);
+                        SociController.addSociFederat(sociHash, triaFede);                        
                     }
                 } while ((triaFede != 1 && triaFede != 2));
                 Console.WriteLine();
-                SociController.addSociFede(sociHash);
+                Console.WriteLine("Alta realitzada correctament");
+                Console.WriteLine();
+
             }
         }
         public void afegirSociInfantil()
         {
             Hashtable sociHash = new Hashtable();
-            int nsoci;
-            string nom, nif;
+            int nsoci, nSociPare;
+            string nom, nif, resposta;
 
             Console.WriteLine();
-            Console.WriteLine("Nou Soci Infantil :");
+            Console.WriteLine("NOU SOCI INFANTIL :");
             Console.Write("Introdueix Nif del Pare:");
             nif = Console.ReadLine();
             Console.WriteLine();
 
-            string pare = SociController.buscarPareByNif(nif);//No puc posar aqui un objecte
+            string pare = SociController.buscarPareByNif(nif);
+            nSociPare = SociController.buscarnSociPareByNif(nif);
 
             if (pare != "")
             {
@@ -180,9 +178,26 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine("Numero de soci: " + nsoci);
                 sociHash.Add("Nom", nom);
                 sociHash.Add("Soci", nsoci);
-                sociHash.Add("SociPare", pare);//corregir això
+                sociHash.Add("SociPare", nSociPare);
 
-                SociController.addSociInfantil(sociHash);
+                Console.WriteLine();
+                Console.WriteLine("COMPROVI LES DADES: ");
+                Console.WriteLine("Nou nº de Soci Infantil: " + nsoci);
+                Console.WriteLine("Nom: " + nom);
+                Console.Write("Confirmar: S/N ");
+                resposta = Console.ReadLine();
+                resposta.ToLower();
+                if (resposta.Equals("s"))
+                {
+                    SociController.addSociInfantil(sociHash);
+                    Console.WriteLine();
+                    Console.WriteLine("Soci infantil  afegit correctament.");
+                }
+                else
+                {
+                    Console.WriteLine("Operació Cancelada.");
+                }
+                Console.WriteLine();                        
             }
             else
             {

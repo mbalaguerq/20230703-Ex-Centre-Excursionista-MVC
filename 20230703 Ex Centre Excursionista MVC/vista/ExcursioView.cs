@@ -115,7 +115,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             do {
                 Console.WriteLine("Data Final: ");                
                 dataF = DateTime.Parse(Console.ReadLine());
-                if (dataF < avui)
+                if (dataF < dataI)
                 {
                     Console.WriteLine("Data Incorrecta!");
                     Console.WriteLine("Introdueixi una data correcta: ");
@@ -138,9 +138,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             foreach(string dato in list)
             {
                 Console.WriteLine(dato);
-
-            }
-         
+            }         
         }
     }
 }
