@@ -15,8 +15,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         public override string ToString()
         {
-            return base.ToString() + "Nif: \t " + nif + "\n" + GetType().Name + "\n" +
-                                     "Assegurança: \t" + assegurança;
+            return base.ToString() + "Nif: \t " + nif + "\n" + GetType().Name + "\n" + assegurança;
         }
     }
     

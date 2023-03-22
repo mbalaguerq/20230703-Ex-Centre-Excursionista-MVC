@@ -321,7 +321,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
-
         public int buscarnSociPareByNif(string nif)
         {
             int nSociPare=0;
@@ -378,16 +377,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 { return seguro; }
             }
             return null;
-        }
-        /*public Federacio triaFede(int triaFede)
-        {
-            foreach (Federacio fede in federacions)
-            {
-                if (fede.Codi == triaFede)
-                { return fede; }
-            }
-            return null;
-        }*/
+        }        
         public void addSociFederat(Hashtable fedeHash, int triaFede)
         {
             Federacio fedeaux = new Federacio();
@@ -404,7 +394,6 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             
             addFederat(fedeHash);
         }
-
         public void deleteSoci(string sociTrobat)
         {
             foreach (Soci soci in socis)

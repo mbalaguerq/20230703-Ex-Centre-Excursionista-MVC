@@ -30,6 +30,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine();
             Console.Write("Introdueix Nif:");
             nif = Console.ReadLine();
+            nif = nif.ToUpper();
             Console.WriteLine();
 
             sociHash.Add("Nif", nif);
@@ -109,6 +110,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine("NOU SOCI FEDERAT: ");
             Console.Write("Introdueix Nif: ");
             nif = Console.ReadLine();
+            nif = nif.ToUpper();
             Console.WriteLine();
 
             sociHash.Add("Nif", nif);
@@ -163,6 +165,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine("NOU SOCI INFANTIL :");
             Console.Write("Introdueix Nif del Pare:");
             nif = Console.ReadLine();
+            nif = nif.ToUpper();
             Console.WriteLine();
 
             string pare = SociController.buscarPareByNif(nif);
@@ -215,22 +218,36 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             do
             {
                 Console.WriteLine();
-                Console.WriteLine("Eliminar Soci:");
-                Console.Write("Introdueix el número de Soci: ");
-                nSoci = int.Parse(Console.ReadLine());
+                Console.WriteLine("ELIMINAR SOCI:");
+                //try
+                //{
+                    Console.Write("Introdueix el número de Soci: ");
+                    nSoci = int.Parse(Console.ReadLine());
+                //}
+                //catch
+                //{
+                    
+                //}
                 sociTrobat = SociController.trobaSociString(nSoci);
                 if (sociTrobat != "")
                 {
+                    Console.WriteLine();
                     Console.WriteLine(sociTrobat.ToString());
                     Console.WriteLine();
                     Console.WriteLine("Confirmi la baixa: ");
-                    Console.Write("1- Si\t 2-No");
+                    Console.Write("1- Si\t 2-No: ");
                     opcio= int.Parse(Console.ReadLine());
-                    if (opcio != 1)
+                    Console.WriteLine();
+                    if (opcio == 1)
                     {
                         SociController.deleteSoci(sociTrobat);
-
                         Console.WriteLine("El soci s'ha eliminat satisfactòriament.");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Operació cancelada");
+                        Console.WriteLine();
                     }
                     encontrado = true;
                 }
@@ -245,7 +262,9 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
         {
             int opcio;
             Console.WriteLine();
-            Console.WriteLine("Mostrar Socis:");
+            Console.WriteLine("MOSTRAR SOCIS:");
+            Console.WriteLine("---------------");
+            Console.WriteLine();
             Console.WriteLine("Tria la opció:");
             Console.WriteLine("1- Llistar tots els socis: ");
             Console.WriteLine("2-Llistar els socis Standar:");
