@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,5 +98,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             quotaExcursions = datos.getQuotaExcursions(sociTrobat, month); 
             return quotaExcursions;
         }
+
+        public bool GetExcursioBySoci(int nSoci)
+        {
+            bool encontrado = true;
+            encontrado = datos.GetExcursioBySoci(nSoci);
+            return encontrado;
+        }
+
+
     }
 }

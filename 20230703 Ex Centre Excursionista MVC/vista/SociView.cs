@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
 {
     internal class SociView
-    {        
+    {
         SociController SociController;
         public SociView() { }
         public SociView(SociController psociController)
@@ -82,12 +82,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine("NIF: " + nif);
                 Console.WriteLine("NOM: " + nom);
                 Console.WriteLine("N.SOCI " + nsoci);
-                Console.WriteLine(sociHash ["Assegurança"].ToString());
+                Console.WriteLine(sociHash["Assegurança"].ToString());
                 Console.WriteLine();
                 Console.WriteLine("Confirmar Alta: S/N");
                 resposta = Console.ReadLine();
                 resposta.ToLower();
-                if(resposta.Equals("s"))
+                if (resposta.Equals("s"))
                 {
                     SociController.addSociStan(sociHash);
                     Console.WriteLine("El soci s'ha afegit correctament.");
@@ -140,13 +140,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                     if (triaFede == 1)
                     {
                         triaFede = 001;
-                       
-                        SociController.addSociFederat(sociHash,triaFede);                        
+
+                        SociController.addSociFederat(sociHash, triaFede);
                     }
                     if (triaFede == 2)
                     {
                         triaFede = 002;
-                        SociController.addSociFederat(sociHash, triaFede);                        
+                        SociController.addSociFederat(sociHash, triaFede);
                     }
                 } while ((triaFede != 1 && triaFede != 2));
                 Console.WriteLine();
@@ -200,77 +200,124 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 {
                     Console.WriteLine("Operació Cancelada.");
                 }
-                Console.WriteLine();                        
+                Console.WriteLine();
             }
             else
             {
                 Console.Write("Soci no trobat:");
             }
-            Console.WriteLine();           
+            Console.WriteLine();
         }
         public void eliminarSoci()
         {
-            int nSoci;
+            int nSoci = 0;
             string sociTrobat;
-            bool encontrado=false;
+            bool encontrado = false;
+            bool borrarSoci = true;
             int opcio;
 
+            /*bool tryBien = false;
             do
             {
                 Console.WriteLine();
                 Console.WriteLine("ELIMINAR SOCI:");
-                //try
-                //{
+                do {
+                    try
+                    {
+                        Console.Write("Introdueix el número de Soci: ");
+                        nSoci = int.Parse(Console.ReadLine());
+                        tryBien = true;
+                    }
+                    catch (Exception error)
+                    {
+                        Console.WriteLine(error.Message);
+                    }
+                } while (!tryBien);*///Com posar un do while a un try and catch
+
+            do
+            {
+                try
+                {
                     Console.Write("Introdueix el número de Soci: ");
                     nSoci = int.Parse(Console.ReadLine());
-                //}
-                //catch
-                //{
-                    
-                //}
-                sociTrobat = SociController.trobaSociString(nSoci);
-                if (sociTrobat != "")
-                {
-                    Console.WriteLine();
-                    Console.WriteLine(sociTrobat.ToString());
-                    Console.WriteLine();
-                    Console.WriteLine("Confirmi la baixa: ");
-                    Console.Write("1- Si\t 2-No: ");
-                    opcio= int.Parse(Console.ReadLine());
-                    Console.WriteLine();
-                    if (opcio == 1)
+                    sociTrobat = SociController.trobaSociString(nSoci);
+                    borrarSoci = SociController.GetExcursioBySoci(nSoci);
+                    if (sociTrobat != "")
                     {
-                        SociController.deleteSoci(sociTrobat);
-                        Console.WriteLine("El soci s'ha eliminat satisfactòriament.");
                         Console.WriteLine();
+                        Console.WriteLine(sociTrobat.ToString());
+                        if (!borrarSoci)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Confirmi la baixa: ");
+                            Console.Write("1- Si\t 2-No: ");
+                            opcio = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+                            if (opcio == 1)
+                            {
+                                SociController.deleteSoci(sociTrobat);
+                                Console.WriteLine("El soci s'ha eliminat satisfactòriament.");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Operació cancelada");
+                                Console.WriteLine();
+                            }
+                            encontrado = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("El Soci no es pot eliminar, ja que ha ");
+                            Console.WriteLine("estat inscrit en una excursió amb anterioritat.");
+                            Console.WriteLine();
+                        }
+                        encontrado = true;
                     }
                     else
                     {
-                        Console.WriteLine("Operació cancelada");
-                        Console.WriteLine();
+                        Console.WriteLine("No hi ha cap soci amb aquest número. ");
                     }
-                    encontrado = true;
                 }
-                else
+                catch (Exception error)
                 {
-                    Console.WriteLine("No hi ha cap soci amb aquest número. ");                    
+                    Console.WriteLine("Dades introduides erronies.");
+                    Console.WriteLine(error.Message);
+
                 }
             } while (!encontrado);  //"0".Contains(opcion);
 
         }
         public void mostrarSocis()
         {
-            int opcio;
+            int opcio = 0;
+            bool triaBe = false;
+
             Console.WriteLine();
             Console.WriteLine("MOSTRAR SOCIS:");
             Console.WriteLine("---------------");
-            Console.WriteLine();
-            Console.WriteLine("Tria la opció:");
-            Console.WriteLine("1- Llistar tots els socis: ");
-            Console.WriteLine("2-Llistar els socis Standar:");
-            Console.WriteLine("3-Llistar els socis Federats: ");
-            Console.Write("4-Llistar socis Infantils: ");
-            opcio = int.Parse(Console.ReadLine());
+            do
+            {
+                try
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Tria la opció:");
+                    Console.WriteLine("1- Llistar tots els socis: ");
+                    Console.WriteLine("2-Llistar els socis Standar:");
+                    Console.WriteLine("3-Llistar els socis Federats: ");
+                    Console.Write("4-Llistar socis Infantils: ");
+                    opcio = int.Parse(Console.ReadLine());
+                    triaBe = true;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Introdueix un número de l'1 al 4 ");
+                    Console.WriteLine(error.Message);
+                    Console.WriteLine();
+                }
+            } while (!triaBe && opcio != 1234);
+
             Console.WriteLine();
             List<string> llistaSocis = SociController.llistaSocis(opcio);
 
@@ -292,7 +339,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                         Console.WriteLine(socisS.ToString());
                         Console.WriteLine();
                     }
-                    Console.WriteLine();                    
+                    Console.WriteLine();
                     break;
                 case 3:
                     Console.WriteLine("Socis federats registrats: ");
@@ -301,7 +348,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                         Console.WriteLine(socisF.ToString());
                         Console.WriteLine();
                     }
-                    Console.WriteLine();                    
+                    Console.WriteLine();
                     break;
                 case 4:
                     Console.WriteLine("Socis infantils registrats: ");
@@ -310,29 +357,46 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                         Console.WriteLine(socisI.ToString());
                         Console.WriteLine();
                     }
-                    Console.WriteLine();              
+                    Console.WriteLine();
                     break;
             }
         }
         public void facturaMensualSoci()
         {
-            int nSoci, month;
+            int nSoci = 0;
+            int month = 0;
             string sociTrobat;
-            decimal quotaMensual, quotaExcursions;            
-            
-            Console.WriteLine();
-            Console.WriteLine("Factura mensual Socis: ");
-            Console.WriteLine();
-            Console.WriteLine("Introdueix el mes: ");
-            Console.WriteLine("1- Gener       7-Juliol");
-            Console.WriteLine("2-Febrer       8-Agost");
-            Console.WriteLine("3-Març         9-Setembre");
-            Console.WriteLine("4-Abril       10-Octubre");
-            Console.WriteLine("5-Maig        11-Novembre");
-            Console.Write("6-Juny        12-Desembre:  ");
-            month=int.Parse(Console.ReadLine());
-            Console.Write("Introdueix el número de soci: ");
-            nSoci = int.Parse(Console.ReadLine());
+            decimal quotaMensual, quotaExcursions;
+            bool triaBe = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("FACTURA MENSUAL SOCI: ");
+                    Console.WriteLine();
+                    Console.WriteLine("Introdueix el mes: ");
+                    Console.WriteLine("1- Gener       7-Juliol");
+                    Console.WriteLine("2-Febrer       8-Agost");
+                    Console.WriteLine("3-Març         9-Setembre");
+                    Console.WriteLine("4-Abril       10-Octubre");
+                    Console.WriteLine("5-Maig        11-Novembre");
+                    Console.Write("6-Juny        12-Desembre:  ");
+                    month = int.Parse(Console.ReadLine());
+                    Console.Write("Introdueix el número de soci: ");
+                    nSoci = int.Parse(Console.ReadLine());
+                    triaBe = true;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Introdueixi números del 0 al 9 ");
+                    Console.WriteLine(error.Message);
+                    Console.WriteLine();
+
+                }
+            } while (!triaBe && month != 0123456789 && nSoci != 0123456789);
+                                                       
             sociTrobat = SociController.trobaSociString(nSoci);
             if (sociTrobat != "")
             {
@@ -342,7 +406,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 quotaMensual = SociController.getQuotaMensual(sociTrobat);
                 Console.WriteLine("Quota de soci Mensual: ");
                 Console.WriteLine(quotaMensual + "Euros");
-                quotaExcursions= SociController.getQuotaExcursions(sociTrobat, month);
+                quotaExcursions = SociController.getQuotaExcursions(sociTrobat, month);
                 Console.WriteLine();
                 Console.WriteLine("Preu total de les excursions realitzades: ");
                 Console.WriteLine(quotaExcursions + " Euros");
@@ -354,7 +418,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             else
             {
                 Console.WriteLine("No hi ha cap soci amb aquest número. ");
-            }            
+            }
         }
     }
 }

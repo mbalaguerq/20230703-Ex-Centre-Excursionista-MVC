@@ -203,6 +203,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             foreach (string s in inscripcions)
             {
                 Console.WriteLine(s);
+               
 
             }
             Console.WriteLine();

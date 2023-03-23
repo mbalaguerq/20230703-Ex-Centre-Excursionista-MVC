@@ -213,8 +213,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 if (date < veh.Data)
                 {
 
-                    llistaExcursions.Add(veh.Descripcio + "\t" + veh.Codi + "\t" + veh.Data + "\t" +
-                        veh.Ndies + "\t" + veh.Preu + "\t");
+                    llistaExcursions.Add("Descipció " + veh.Descripcio + "\n" + "Codi Excursió " + veh.Codi + "\n" +
+                       "Data: "  + veh.Data + "\n" + "Dies: " + veh.Ndies + "\n" +  "Preu: " + veh.Preu + "\n");
                 }
             }
             return llistaExcursions;
@@ -346,7 +346,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             Soci modifiSoci = getSociByNum(nSoci);
             {
-                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.basic))
+                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Ts.Equals(TipoSeguro.basic))
                 {
                     foreach (Assegurança seguro in asseguran)
                     {
@@ -356,7 +356,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                         }
                     }
                 }
-                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Equals(TipoSeguro.complert))
+                if (modifiSoci is SociStandar && (modifiSoci as SociStandar).Assegurança.Ts.Equals(TipoSeguro.complert))
                 {
                     foreach (Assegurança seguro in asseguran)
                     {
@@ -521,6 +521,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             {
                 if (soci.Nsoci == (int)infoHash["nSoci"])
                 {
+                    infoHash.Add("Soci", soci);
                     infoHash.Add("SociNom", soci.Nom);
                 }
             }
@@ -539,7 +540,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 }
                 return inscrip;
             }
-            return null;
+            return inscrip;//et tornarà la llista buida.
         }
         public bool DeleteInscripcio(int nIns)
         {
@@ -606,6 +607,20 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 }
             }
             return inscrip;
+        }
+        public bool GetExcursioBySoci(int nSoci)
+        {
+            bool encontrado = true;
+
+            foreach (Inscripcio ins in inscripcions)
+            {
+                if(ins.Soci1.Nsoci==nSoci)
+                {
+                    return encontrado;
+                }
+                encontrado = false;
+            }
+            return encontrado;
         }
     }
 }
