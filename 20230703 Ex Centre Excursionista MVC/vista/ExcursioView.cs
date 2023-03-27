@@ -1,5 +1,4 @@
 ﻿using _20230703_Ex_Centre_Excursionista_MVC.Controlador;
-using _20230703_Ex_Centre_Excursionista_MVC.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;

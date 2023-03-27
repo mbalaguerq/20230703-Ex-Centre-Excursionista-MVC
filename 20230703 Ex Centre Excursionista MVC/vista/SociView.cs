@@ -62,6 +62,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                         tipus = TipoSeguro.basic;
                         SociController.triaAsseg(tipus);
 
+                        //PARLAT AMB JOSEP. A LA VISTA NO HI POT HAVER OBJECTES. ES DEIXA AIXÍ JA QUE 
+                        //LA LÒGICA D'AQUEST MÈTODE ES DIFICIL I SI NO, HAURIA DE CANVIAR TOTA LA OPCIÓ SENCERA.
                         Assegurança asseg = SociController.triaAsseg(tipus);
                         sociHash.Add("Assegurança", asseg);
                         Console.WriteLine(asseg.ToString());
@@ -71,6 +73,8 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                         tipus = TipoSeguro.complert;
                         SociController.triaAsseg(tipus);
 
+                        //PARLAT AMB JOSEP. A LA VISTA NO HI POT HAVER OBJECTES. ES DEIXA AIXÍ JA QUE 
+                        //LA LÒGICA D'AQUEST MÈTODE ES DIFICIL I SI NO, HAURIA DE CANVIAR TOTA LA OPCIÓ SENCERA.
                         Assegurança asseg = SociController.triaAsseg(tipus);
                         sociHash.Add("Assegurança", asseg);
                         Console.WriteLine(asseg.ToString());
@@ -238,10 +242,12 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             {
                 try
                 {
+                    Console.WriteLine();
+                    Console.WriteLine("ELIMINAR SOCI:");
                     Console.Write("Introdueix el número de Soci: ");
                     nSoci = int.Parse(Console.ReadLine());
-                    sociTrobat = SociController.trobaSociString(nSoci);
-                    borrarSoci = SociController.GetExcursioBySoci(nSoci);
+                    sociTrobat = SociController.trobaSociString(nSoci);//BUSCA EL SOCI PER MOSTRAR-LO
+                    borrarSoci = SociController.GetExcursioBySoci(nSoci);//BUSCA SI EL SOCI HA FET EXCUERSIONS
                     if (sociTrobat != "")
                     {
                         Console.WriteLine();
