@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -214,7 +215,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 {
 
                     llistaExcursions.Add("Descipció " + veh.Descripcio + "\n" + "Codi Excursió " + veh.Codi + "\n" +
-                       "Data: "  + veh.Data + "\n" + "Dies: " + veh.Ndies + "\n" +  "Preu: " + veh.Preu + "\n");
+                       "Data: " + veh.Data + "\n" + "Dies: " + veh.Ndies + "\n" + "Preu: " + veh.Preu + "\n");
                 }
             }
             return llistaExcursions;
@@ -278,16 +279,16 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         {
             _contador++;
             return _contador;
-        }       
+        }
         public int GetNinscripcio()
         {
             _inscripcio++;
             return _inscripcio;
-        }        
+        }
         public int GetNouCodiExc()
         {
             _excursio++;
-            return _excursio; 
+            return _excursio;
         }
         public string getNomSociByNum(int nSociBuscat)
         {
@@ -323,11 +324,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
         }
         public int buscarnSociPareByNif(string nif)
         {
-            int nSociPare=0;
+            int nSociPare = 0;
 
             foreach (Soci soci in socis)
             {
-                if(soci is Federat && (soci as Federat).Nif.Equals(nif))
+                if (soci is Federat && (soci as Federat).Nif.Equals(nif))
 
                 {
                     (soci as Federat).Nsoci = nSociPare;
@@ -338,7 +339,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 {
                     (soci as SociStandar).Nsoci = nSociPare;
                     return nSociPare;
-                }                
+                }
             }
             return -1;
         }
@@ -377,7 +378,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 { return seguro; }
             }
             return null;
-        }        
+        }
         public void addSociFederat(Hashtable fedeHash, int triaFede)
         {
             Federacio fedeaux = new Federacio();
@@ -387,11 +388,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
                 if (fede.Codi == triaFede)
                 {
                     fedeaux.Codi = fede.Codi;
-                    fedeaux.Nom=fede.Nom;
+                    fedeaux.Nom = fede.Nom;
                 }
             }
-            fedeHash.Add("Federació",fedeaux);
-            
+            fedeHash.Add("Federació", fedeaux);
+
             addFederat(fedeHash);
         }
         public void deleteSoci(string sociTrobat)
@@ -561,18 +562,18 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
         {
             List<string> inscrip = new List<string>();
-           
+
             foreach (Inscripcio ins in inscripcions)
             {
                 if (ins.Soci1.Nsoci == nSoci)
                 {
-                    inscrip.Add("Num. Soci: " +  ins.Soci1.Nsoci.ToString());
+                    inscrip.Add("Num. Soci: " + ins.Soci1.Nsoci.ToString());
                     inscrip.Add("Nom: " + ins.Soci1.Nom.ToString());
                     inscrip.Add("Data: " + ins.Excursio.Data.ToString());
                     inscrip.Add("Excursió: " + ins.Excursio.Descripcio.ToString());
                     if (ins.Soci1 is Federat)
-                    {                      
-                        inscrip.Add("Preu: " + (ins.Excursio.Preu * 0,9).ToString() + " Euros");
+                    {
+                        inscrip.Add("Preu: " + (ins.Excursio.Preu * 0, 9).ToString() + " Euros");
                     }
                     else
                     {
@@ -583,14 +584,14 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
             }
             return null;
         }
-        public List<string> GetInscripByData(Hashtable dates) 
+        public List<string> GetInscripByData(Hashtable dates)
         {
             List<string> inscrip = new List<string>();
 
-            foreach(Inscripcio ins in inscripcions)            
+            foreach (Inscripcio ins in inscripcions)
             {
                 if (ins.Excursio.Data >= (DateTime)dates["DataI"] && ins.Excursio.Data <= (DateTime)dates["DataF"])
-             
+
                 {
                     inscrip.Add("Num. Soci: " + ins.Soci1.Nsoci.ToString());
                     inscrip.Add("Nom: " + ins.Soci1.Nom.ToString());
@@ -614,13 +615,41 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
             foreach (Inscripcio ins in inscripcions)
             {
-                if(ins.Soci1.Nsoci==nSoci)
+                if (ins.Soci1.Nsoci == nSoci)
                 {
                     return encontrado;
                 }
                 encontrado = false;
             }
             return encontrado;
+        }
+
+        public void grabarCSV()
+        {
+            StreamWriter fitxer = new StreamWriter(@"c:\CSV\excursions.csv");
+
+            string texto = "";
+
+            foreach (Excursio excursio in excursions)
+            {
+                texto = excursio.Ndies + "," + excursio.Preu + "," + excursio.Codi + "," + excursio.Data + "," +
+                        excursio.Descripcio;
+                fitxer.WriteLine(texto);
+            }
+            fitxer.Close();
+        }
+        public List<string> leerCSV()
+        {
+            string fichero = @"C:\csv\excursions.csv";
+            StreamReader arxiu = new StreamReader(fichero);
+            string linea;
+            List<string> lines = new List<string>();
+
+            while ((linea = arxiu.ReadLine()) != null)
+            {
+                lines.Add(linea);
+            }
+            return lines;
         }
     }
 }

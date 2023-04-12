@@ -51,7 +51,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             string opcion;
             Console.WriteLine();
             Console.WriteLine("1.Afegir Excusió ");
-            Console.WriteLine("2.Mostrar Excusions");// con filtro entre fechas                                                                 
+            Console.WriteLine("2.Mostrar Excusions");// con filtro entre fechas
+            Console.WriteLine("3.Llegir excursions d'un arxiu CSV");
+            Console.WriteLine("4.Gravar excursions a CSV");
+            Console.WriteLine("Afegir excursions a partir de CSV ");
             Console.WriteLine("0. Sortir");
             opcion = pedirOpcionMenuExc();
             
@@ -60,7 +63,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 case "1":
                     return "2.1";   //afegirExcursio();             
                 case "2":
-                    return "2.2";   //mostrarExcursio();                                               
+                    return "2.2";   //mostrarExcursio();
+                case "3":
+                    return "2.3";   //leerCSV()
+                case "4":
+                    return "2.4";   //grabarCSV();
+                case "5":
+                    return "2.5";   //carregaCSV();
                 default:
                     return "0";                   
             }         
@@ -73,7 +82,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine();
                 Console.Write("Opcion: ");
                 opcion = Console.ReadLine();
-            } while (!"012".Contains(opcion));
+            } while (!"012345".Contains(opcion));
 
             return opcion;
         }

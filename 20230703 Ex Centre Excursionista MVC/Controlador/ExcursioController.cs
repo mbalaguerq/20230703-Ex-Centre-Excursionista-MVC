@@ -34,5 +34,15 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             codi = datos.GetNouCodiExc();
             return codi;
         }
+
+        public void grabarCSV()
+        {
+            datos.grabarCSV();
+        }
+        public List<string> leerCSV()
+        {
+            return datos.leerCSV();
+        }
+
     }
 }

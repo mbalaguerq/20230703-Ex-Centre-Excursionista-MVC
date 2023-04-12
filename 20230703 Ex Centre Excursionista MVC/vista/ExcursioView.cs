@@ -139,5 +139,31 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
                 Console.WriteLine(dato);
             }         
         }
+        
+        public void leerCSV()
+        {
+            List<String> fila = excursioController.leerCSV();
+
+            Console.WriteLine("LLEGIR EXCURSIONS DES D'UN ARXIU CSV");
+            Console.WriteLine();
+            foreach (string filaString in fila)
+            {
+                string[] linea = filaString.Split(',');
+
+                for (int i = 0; i < linea.Length; i++)
+                {
+                    Console.Write(linea[i] + "\t");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+
+        }
+        public void grabarCSV()
+        {
+            Console.WriteLine("GRAVAR LES EXCURSIONS A UN ARXIU CSV");
+            Console.WriteLine();
+            excursioController.grabarCSV();
+        }
     }
 }
