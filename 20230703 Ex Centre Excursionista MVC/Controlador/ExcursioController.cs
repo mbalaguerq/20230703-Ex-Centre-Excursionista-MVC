@@ -43,6 +43,10 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
         {
             return datos.leerCSV();
         }
+        public void carregaCSV()
+        {
+            datos.carregaCSV();
+        }
 
     }
 }

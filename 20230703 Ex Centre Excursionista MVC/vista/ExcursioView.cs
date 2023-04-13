@@ -1,4 +1,5 @@
 ﻿using _20230703_Ex_Centre_Excursionista_MVC.Controlador;
+using _20230703_Ex_Centre_Excursionista_MVC.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -138,8 +139,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             {
                 Console.WriteLine(dato);
             }         
-        }
-        
+        }        
         public void leerCSV()
         {
             List<String> fila = excursioController.leerCSV();
@@ -149,11 +149,15 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             foreach (string filaString in fila)
             {
                 string[] linea = filaString.Split(',');
+                Console.WriteLine("N dies " + "\t" + "Preu" + "\t" + "Codi Ex" + "\t" + "Data inici"  +
+                    "\t\t" + "Descripció");
+                Console.WriteLine("==============================================================================");
 
                 for (int i = 0; i < linea.Length; i++)
                 {
                     Console.Write(linea[i] + "\t");
                 }
+                Console.WriteLine();
                 Console.WriteLine();
             }
             Console.WriteLine();
@@ -165,5 +169,13 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Vista
             Console.WriteLine();
             excursioController.grabarCSV();
         }
+        public void carregaCSV()
+        {
+            Console.WriteLine("CÀRREGA D'EXCURSIONS DES D'UN ARXIU CSV");
+            Console.WriteLine();            
+            Console.WriteLine("Les dades de l'arxiu es gravaran com a noves excursions");
+            excursioController.carregaCSV();
+        }
+
     }
 }

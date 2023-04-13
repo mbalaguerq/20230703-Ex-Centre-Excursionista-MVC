@@ -46,7 +46,7 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
                         grabarCSV();
                         break;
                     case "2.5":
-                        //carregaCSV();
+                        carregaCSV();
                         break;
                     case "3.1":
                         afegirSociEstandar();
@@ -190,11 +190,11 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Controlador
             ExcursioView excursioView = new ExcursioView(excursioController);
             excursioView.grabarCSV();
         }
-        /*private void carregaCSV()
+        private void carregaCSV()
         {
             ExcursioController excursioController = new ExcursioController(datos);
             ExcursioView excursioView = new ExcursioView(excursioController);
             excursioView.carregaCSV();
-        }*/
+        }
     }
 }

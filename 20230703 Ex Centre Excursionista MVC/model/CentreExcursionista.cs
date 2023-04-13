@@ -647,9 +647,33 @@ namespace _20230703_Ex_Centre_Excursionista_MVC.Model
 
             while ((linea = arxiu.ReadLine()) != null)
             {
-                lines.Add(linea);
+                if (!linea.Equals(""))
+                {
+                    lines.Add(linea);
+                }
             }
             return lines;
         }
+        public void carregaCSV()
+        {
+            Excursio exc;
+
+            string fitxer = @"C:\csv\excursions.csv";
+            StreamReader arxiu = new StreamReader(fitxer);
+            string linea;
+            while ((linea = arxiu.ReadLine()) != null)
+            {
+                string[] columna = linea.Split(',');
+                exc = new Excursio();
+
+                exc.Ndies = int.Parse(columna[0]);
+                exc.Preu = decimal.Parse(columna[1]);
+                exc.Codi = int.Parse(columna[2]);
+                exc.Data = DateTime.Parse(columna[3]);
+                exc.Descripcio = columna[4];
+                excursions.Add(exc);
+            }
+        }
     }
+
 }
